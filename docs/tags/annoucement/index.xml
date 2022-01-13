@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Annoucement on DATA 606 - Statistics &amp; Probability - Spring 2022</title>
+    <link>/tags/annoucement/</link>
+    <description>Recent content in Annoucement on DATA 606 - Statistics &amp; Probability - Spring 2022</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/annoucement/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Welcome to DATA606!</title>
+      <link>/blog/01-welcome-to-data606/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/01-welcome-to-data606/</guid>
+      <description>Welcome to DATA606! Your instructors will be Dr. Jason Bryer and Dr. Angela Lui. Couple of important notes as you get started:
+ The course syllabus located here: https://spring2022.data606.net/course-overview. We will post all course materials there. Blackboard will be used primarily for submitting assignments. Please read the syllabus carefully! Send us any questions you may still have about the course.
+ Complete this Google Form as soon as possible.</description>
+    </item>
+    
+  </channel>
+</rss>
