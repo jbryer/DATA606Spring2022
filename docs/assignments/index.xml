@@ -26,15 +26,6 @@ Part 1 Complete this Google Form. The purpose of this survey is for me to get to
     </item>
     
     <item>
-      <title>Homework</title>
-      <link>/assignments/homework/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/assignments/homework/</guid>
-      <description>The solutions to the practice problems are at the end of the book and do not need to be handed in. Graded assignments should use the provided R markdown templates provided below. Data for the homework assignments, and for within the chapters too, can be downloaded here. Or alternatively all the data is included in the openintro R packge (use the data(package = &#39;openintro&#39;) command to list all the datasets available in that package).</description>
-    </item>
-    
-    <item>
       <title>Labs</title>
       <link>/assignments/labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -54,12 +45,12 @@ Introduction to R and RStudio (Template) Introduction to Data (Template) Probabi
     </item>
     
     <item>
-      <title>Final Exam</title>
-      <link>/assignments/final/</link>
+      <title>Exams</title>
+      <link>/assignments/exams/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/assignments/final/</guid>
-      <description>The final exam will be posted on Blackboard during the time indicated on the course schedule.</description>
+      <guid>/assignments/exams/</guid>
+      <description>There will be a midterm and final exam. They will be posted on Blackboard during the time indicated on the course schedule.</description>
     </item>
     
   </channel>

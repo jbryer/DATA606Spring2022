@@ -5,10 +5,10 @@ weight: 9
 ---
 
 
-**Instructor:** Jason Bryer, Ph.D.  
+**Instructor:** Jason Bryer, Ph.D. and Angela Lui, Ph.D.  
 **Class Meetup:** Wednesday 8:30pm to 9:30pm  
 **Office Hours:** Friday 12pm to 1pm & by appointment  
-**Email:** <a href="mailto:jason.bryer@cuny.edu">jason.bryer@cuny.edu</a>    
+**Email:** <a href="mailto:jason.bryer@cuny.edu">jason.bryer@cuny.edu</a> <a href="mailto:angela.lui@cuny.edu">angela.lui@cuny.edu</a>    
 
 
 ### Course Description
@@ -41,12 +41,14 @@ Probabilistic techniques are the foundation of many data science applications fr
 
 ### Grading
 
-* [DAACS](/assignments/daacs) (6%)
 * [Participation](/assignments/participation) (10%)
-* [Homework](/assignments/homework) (18%)
-* [Labs](/assignments/labs) (36%)
-* [Data Project](/assignments/project) (20%)
-* [Final exam](assignments/final/) (10%)
+	* [DAACS](/assignments/daacs)
+	* [One Minute Papers](/assignments/participation)
+* [Labs](/assignments/labs) (35%)
+* [Data Project](/assignments/project) (30%)
+* [Exams](/assignments/exams/)
+	* Midterm (10%)
+	* Final exam (15%)
 
 #### Grade Distribution
 
