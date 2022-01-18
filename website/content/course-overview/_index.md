@@ -5,10 +5,10 @@ weight: 9
 ---
 
 
-**Instructor:** Jason Bryer, Ph.D. and Angela Lui, Ph.D.  
+**Instructors:** Jason Bryer, Ph.D. and Angela Lui, Ph.D.  
 **Class Meetup:** Wednesday 8:30pm to 9:30pm  
 **Office Hours:** Friday 12pm to 1pm & by appointment  
-**Email:** <a href="mailto:jason.bryer@cuny.edu">jason.bryer@cuny.edu</a> <a href="mailto:angela.lui@cuny.edu">angela.lui@cuny.edu</a>    
+**Email:** <a href="mailto:jason.bryer@cuny.edu">jason.bryer@cuny.edu</a>, <a href="mailto:angela.lui@cuny.edu">angela.lui@cuny.edu</a>    
 
 
 ### Course Description
