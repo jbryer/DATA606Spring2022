@@ -6,7 +6,7 @@ weight: 9
 
 
 **Instructors:** Jason Bryer, Ph.D. and Angela Lui, Ph.D.  
-**Class Meetup:** Wednesday 8:30pm to 9:30pm  
+**Class Meetup:** Wednesday 8:00pm to 9:00pm  
 **Office Hours:** Friday 12pm to 1pm & by appointment  
 **Email:** <a href="mailto:jason.bryer@cuny.edu">jason.bryer@cuny.edu</a>, <a href="mailto:angela.lui@cuny.edu">angela.lui@cuny.edu</a>    
 
@@ -30,10 +30,10 @@ By then end of the course, students should be able to:
 
 ### Program Learning Outcomes addressed by the course:
 
-* Business Understanding.  Learn when probabilistic techniques apply to certain categories of business problems, discuss the sorts of solutions that are possible, and understand the limitations of these techniques.
-* Foundational Math Skills. Explore and analyze data, build probabilistic and statistical models, construct estimators, and test hypotheses.
-* Predictive Modeling.  Learn foundational techniques that underlie predictive modeling algorithms, such as Naïve Bayes.
-* Presentation.  Complete and submit collaborative assignments using techniques from the course.
+* Business Understanding:  Learn when probabilistic techniques apply to certain categories of business problems, discuss the sorts of solutions that are possible, and understand the limitations of these techniques.
+* Foundational Math Skills: Explore and analyze data, build probabilistic and statistical models, construct estimators, and test hypotheses.
+* Predictive Modeling:  Learn foundational techniques that underlie predictive modeling algorithms, such as Naïve Bayes.
+* Presentation:  Complete and submit collaborative assignments using techniques from the course.
 
 ### How is this course relevant for data analytics professionals?
 
@@ -67,11 +67,9 @@ Failure                                    |      F       |   < 70    |  0   |
 
 This course is conducted entirely online. Each week, you will have various resources made available, including weekly readings from the textbooks and occasionally additional readings provided by the instructor. Most weeks will have homework assignments and labs to be submitted (although some chapters will take more than one week, see the [schedule](/course-overview/schedule/) for details). There will also be a presentation required and a forum post introduction required. You are expected to complete all assignments by their due dates.
 
-**You are expected to attend or watch every Meetup.** I highly recommend attending the Meetups live if possible but I understand that may not be possible for everyone. Recordings will be made available by the next morning on the [Meetups page](/course-overview/meetups/). In addition to highlighting key concepts from each learning module, some topics will be discussed that are not in the textbook. Moreover, I regularly make announcements in the Meetups that will be important to being successful in this course. At the end of each Meetup there will be a short reflective exercise. These will contribute to your participation grade.
+**You are expected to attend or watch every Meetup.** We highly recommend attending the Meetups live if possible but understand that may not be possible for everyone. Recordings will be made available by the next morning on the [Meetups page](/course-overview/meetups/). In addition to highlighting key concepts from each learning module, some topics will be discussed that are not in the textbook. Moreover, we regularly make announcements in the Meetups that will be important to being successful in this course. At the end of each Meetup there will be a short reflective exercise. These will contribute to your participation grade.
 
-Meetup presentations will comprise the solution and presentation to the class of one of the suggested problems for study from the weekly materials (not the graded homework problems). Each student must present one problem during the semester. Problems are chosen by entering your name and problem in the Google Spreadsheet. Note there is a maximum of three presentations per meetup and presentations should be no more than five minutes. Prepare your presentation so that the slides or document (I suggest using R Markdown) will be shared on the course website. Problems are assigned first come, first served, so any problem not already chosen by another student is available.
-
-The culmination of the course will be the presentation of the analysis of a dataset of your choosing. There will be a number of time slots available to present. You will be **required to attend one presentation session**, present yoru analysis and provide peer feedback for other students in that timeslot. See the [project](/assignments/project/) for more information.
+The culmination of the course will be the presentation of the analysis of a dataset of your choosing. There will be a number of time slots available to present. You will be **required to attend one presentation session**, during which you will present your analysis and provide peer feedback for other students in that timeslot. See the [project](/assignments/project/) for more information.
 
 ### Accessibility and Accommodations
 
