@@ -23,7 +23,7 @@
       
       <guid>/assignments/daacs/</guid>
       <description>Formative Assessments Formative assessments are a type of assessment that help students and teachers monitor student learning. These are low stakes assessments (i.e. you get credit for doing them, not based upon how you did). I will use the results to inform my instruction.
-Part 1 Complete this Google Form. The purpose of this survey is for me to get to know you better. There is no passing or failing, right or wrong answers.</description>
+Part 1 Complete this Google Form. The purpose of this survey is for us to get to know you better. There is no passing or failing, right or wrong answers.</description>
     </item>
     
     <item>
@@ -52,7 +52,7 @@ I am currently an Assistant Professor in Data Science and Information Systems at
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/assignments/participation/</guid>
-      <description>One Minute Papers A &amp;ldquo;one minute paper&amp;rdquo; (Angelo &amp;amp; Cross, 1993) is a short written reflection to be completed after each class meetup. You are to answer two questions: 1) What was the most important thing you learned during this class? and 2) What important question remains unanswered for you? My goal is to give you a moment to reflect on the most important concepts presented were and to provide me with information about what concepts are still unclear.</description>
+      <description>One Minute Papers A &amp;ldquo;one minute paper&amp;rdquo; (Angelo &amp;amp; Cross, 1993) is a short written reflection to be completed after each class meetup. You are to answer two questions: 1) What was the most important thing you learned during this class? and 2) What important question remains unanswered for you? Our goal is to give you a moment to reflect on the most important concepts presented were and to provide me with information about what concepts are still unclear.</description>
     </item>
     
     <item>
@@ -63,7 +63,7 @@ I am currently an Assistant Professor in Data Science and Information Systems at
       <guid>/course-overview/schedule/</guid>
       <description>Note: Schedule is subject to change. Last updated January 13, 2022 10:25AM.
 CUNY SPS Academic Calendar
- document.addEventListener(&#39;DOMContentLoaded&#39;, function() { var calendarEl = document.getElementById(&#39;calendar&#39;); var calendar = new FullCalendar.Calendar(calendarEl, { initialDate: &#39;2022-01-18&#39;, initialView: &#39;dayGridMonth&#39;, headerToolbar: { left: &#39;prev,next today&#39;, center: &#39;title&#39;, right: &#39;dayGridMonth,timeGridWeek,timeGridDay,listWeek&#39; }, height: &#39;auto&#39;, navLinks: true, // can click day/week names to navigate views editable: true, selectable: true, selectMirror: true, nowIndicator: true, events: [ { title: &#34;</description>
+ document.addEventListener(&#39;DOMContentLoaded&#39;, function() { var calendarEl = document.getElementById(&#39;calendar&#39;); var calendar = new FullCalendar.Calendar(calendarEl, { initialDate: &#39;2022-01-24&#39;, initialView: &#39;dayGridMonth&#39;, headerToolbar: { left: &#39;prev,next today&#39;, center: &#39;title&#39;, right: &#39;dayGridMonth,timeGridWeek,timeGridDay,listWeek&#39; }, height: &#39;auto&#39;, navLinks: true, // can click day/week names to navigate views editable: true, selectable: true, selectMirror: true, nowIndicator: true, events: [ { title: &#34;</description>
     </item>
     
     <item>
@@ -209,7 +209,7 @@ LaTeX LaTeX is a typesetting language for preparing documents.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/course-overview/mathjax/</guid>
-      <description>NOTE: I am aware that Daum Equation Editor has not been updated a long while and may no longer be supported on may platforms. I have not yet found a replacement as good as Daum, however have a look at this Wikipedia page on formula editors for a comprehnsive list of available software.
+      <description>NOTE: We are aware that Daum Equation Editor has not been updated a long while and may no longer be supported on may platforms. We have not yet found a replacement as good as Daum, however have a look at this Wikipedia page on formula editors for a comprehnsive list of available software.
 Occasionally you will need to type equations in homework and labs. R Markdown supports LaTeX style equations using the MathJax javascript library.</description>
     </item>
     
