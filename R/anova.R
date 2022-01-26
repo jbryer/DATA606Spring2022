@@ -11,6 +11,8 @@ desc$contrast <- (desc$mean - mean(desc$mean))
 mean(desc$contrast) # Should be 0!
 desc
 
+anova(aov(Bacterial.Counts ~ Method, data = df))
+
 df <- merge(hand, desc[,c('Group', 'contrast', 'mean')],
 			by.x = 'Method', by.y = 'Group', all.x = TRUE)
 
@@ -34,30 +36,30 @@ df <- merge(hand, desc[,c('Group', 'contrast', 'mean')],
 
 ( p <- 1 - pf(F_stat, df_between, df_within) )
 
-df_rect <- data.frame(
-	group = c('Between', 'Within'),
-	xmin = c(-1* sqrt(MS_between) / sd(df$Bacterial.Counts),
-			 -1 *sqrt(MS_within) / sd(df$Bacterial.Counts)),
-	xmax = c(    sqrt(MS_between) / sd(df$Bacterial.Counts),
-				 sqrt(MS_within) / sd(df$Bacterial.Counts)),
-	ymin = c(grand_mean - 1 * sqrt(MS_between) / sd(df$Bacterial.Counts),
-			 grand_mean - 1 * sqrt(MS_within) / sd(df$Bacterial.Counts)),
-	ymax = c(grand_mean +     sqrt(MS_between) / sd(df$Bacterial.Counts),
-			 grand_mean +     sqrt(MS_within) / sd(df$Bacterial.Counts))
-)
+# df_rect <- data.frame(
+# 	group = c('Between', 'Within'),
+# 	xmin = c(-1* sqrt(MS_between) / sd(df$Bacterial.Counts),
+# 			 -1 *sqrt(MS_within) / sd(df$Bacterial.Counts)),
+# 	xmax = c(    sqrt(MS_between) / sd(df$Bacterial.Counts),
+# 				 sqrt(MS_within) / sd(df$Bacterial.Counts)),
+# 	ymin = c(grand_mean - 1 * sqrt(MS_between) / sd(df$Bacterial.Counts),
+# 			 grand_mean - 1 * sqrt(MS_within) / sd(df$Bacterial.Counts)),
+# 	ymax = c(grand_mean +     sqrt(MS_between) / sd(df$Bacterial.Counts),
+# 			 grand_mean +     sqrt(MS_within) / sd(df$Bacterial.Counts))
+# )
 
 df_rect <- data.frame(
 	`Mean Square` = c('Between', 'Within'),
 	# contrast = NA,
 	# Value = NA,
-	xmin = c(-1* sqrt(MS_between),
-			 -1 *sqrt(MS_within)),
-	xmax = c(    sqrt(MS_between),
-				 sqrt(MS_within)),
-	ymin = c(grand_mean - 1 * sqrt(MS_between),
-			 grand_mean - 1 * sqrt(MS_within)),
-	ymax = c(grand_mean +     sqrt(MS_between),
-			 grand_mean +     sqrt(MS_within)) )
+	xmin = c(-1 * sqrt(MS_between) / 2,
+			 -1 * sqrt(MS_within) / 2),
+	xmax = c(     sqrt(MS_between) / 2,
+				  sqrt(MS_within) / 2),
+	ymin = c(grand_mean - 1 * sqrt(MS_between) / 2,
+			 grand_mean - 1 * sqrt(MS_within) / 2),
+	ymax = c(grand_mean +     sqrt(MS_between) / 2,
+			 grand_mean +     sqrt(MS_within) / 2) )
 
 slope <- (desc[1,]$mean - desc[2,]$mean) / (desc[1,]$contrast - desc[2,]$contrast)
 intercept <- desc[1,]$mean - slope * desc[1,]$contrast
@@ -68,10 +70,10 @@ df_rect_within <- df %>%
 	summarize(contrast = mean(Bacterial.Counts) - grand_mean,
 			  mean = mean(Bacterial.Counts),
 			  MS = sum(square) / (n() - 1)) %>%
-	mutate(xmin = contrast - sqrt(MS),
-		   xmax = contrast + sqrt(MS),
-		   ymin = mean - sqrt(MS),
-		   ymax = mean + sqrt(MS))
+	mutate(xmin = contrast - sqrt(MS) / 2,
+		   xmax = contrast + sqrt(MS) / 2,
+		   ymin = mean - sqrt(MS) / 2,
+		   ymax = mean + sqrt(MS) / 2)
 
 df_subscript <- paste0(df_between, ', ', df_within)
 title <- bquote(F[.(df_subscript)] == .(prettyNum(F_stat, digits = 3)) ~ '; p' ~ .(ifelse(p < 0.01, ' < 0.01', paste0(' = ', prettyNum(p, digits = 3)))))
@@ -91,7 +93,7 @@ ggplot() +
 			  color = 'maroon') +
 	geom_hline(yintercept = mean(df$Bacterial.Counts), alpha = 0.5, linetype = 2, size = 1) +
 	geom_abline(slope = slope, intercept = intercept, color = 'grey70') +
-	geom_segment(data = desc, aes(x = contrast, xend = contrast, y = mean - sd, yend = mean + sd), alpha = 0.6) +
+	geom_segment(data = desc, aes(x = contrast, xend = contrast, y = mean - sd / 2, yend = mean + sd / 2), alpha = 0.6) +
 	geom_point(data = df, aes(x = contrast, y = Bacterial.Counts, group = Method, color = Method),
 			   alpha = 0.75, shape = 1, size = 2) +
 	geom_point(aes(x = 0, y = grand_mean), color = 'blue', size = 4) +
