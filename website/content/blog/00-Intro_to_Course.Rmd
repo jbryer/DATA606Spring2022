@@ -1,0 +1,19 @@
+---
+title: "Intro to the Course"
+author: "Jason Bryer"
+date: 2022-01-27
+draft: false
+categories: ["Meetups"]
+tags: ["Annoucement"]
+---
+
+[Click here](/slides/00-Intro_to_Course.html#1) to open the slides ([PDF](/slides/00-Intro_to_Course.pdf)).
+
+
+
+<!-- more -->
+
+[Click here](/slides/00-Intro_to_Course.html#1) to open the slides ([PDF](/slides/00-Intro_to_Course.pdf)).
+
+
+

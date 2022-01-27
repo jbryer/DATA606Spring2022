@@ -43,7 +43,12 @@ Join Zoom Meeting:  https://us02web.zoom.us/j/86462823125
 ```{r schedule-table, echo=FALSE, results='asis'}
 # meetups$Date <- format(meetups$Date, '%a, %b %d')
 meetups$Date <- format(meetups$Date, format = '%a, %b %d, %Y')
-knitr::kable(meetups[,c('Date','StartTime','Topic','Resources')], ) %>%
+links <- which(!is.na(meetups$Slides))
+if(length(links) > 0) {
+	meetups[links,]$Topic <- paste0('[', meetups[links,]$Topic, '](/blog/', meetups[links,]$Slides, '/)')
+}
+
+knitr::kable(meetups[,c('Date','StartTime','Topic')], ) %>%
 	kable_styling(full_width = F)
 # meetups[,c('Date','StartTime','Topic','Resources')] %>% 
 # 	regulartable() %>% autofit()
