@@ -47,7 +47,7 @@ for(i in tocopy) {
 			}, finally = { setwd(wd) })
 		}
 		
-		if(exisits(pdf)) { # Copy PDF to docs directory
+		if(file.exists(pdf)) { # Copy PDF to docs directory
 			file.copy(pdf, paste0('docs/slides/', basename(pdf)))
 		}
 	}
@@ -78,9 +78,9 @@ for(i in 1:nrow(meetups)) {
 			'draft: false', '\n',
 			'categories: ["Meetups"]', '\n',
 			'tags: ["Annoucement"]', '\n',
-			'---', '\n', '\n',
+			'---', '\n\n\n',
 			blogcontent, '\n\n',
-			'<!-- more -->\n\n',
+			'<!--more-->\n\n',
 			blogcontent, '\n\n',
 			sep  = '',
 			file = blogfile)

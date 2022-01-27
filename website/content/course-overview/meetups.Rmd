@@ -45,7 +45,7 @@ Join Zoom Meeting:  https://us02web.zoom.us/j/86462823125
 meetups$Date <- format(meetups$Date, format = '%a, %b %d, %Y')
 links <- which(!is.na(meetups$Slides))
 if(length(links) > 0) {
-	meetups[links,]$Topic <- paste0('[', meetups[links,]$Topic, '](/blog/', meetups[links,]$Slides, '/)')
+	meetups[links,]$Topic <- paste0('[', meetups[links,]$Topic, '](/blog/', tolower(meetups[links,]$Slides), '/)')
 }
 
 knitr::kable(meetups[,c('Date','StartTime','Topic')], ) %>%

@@ -7,11 +7,12 @@ categories: ["Meetups"]
 tags: ["Annoucement"]
 ---
 
+
 [Click here](/slides/00-Intro_to_Course.html#1) to open the slides ([PDF](/slides/00-Intro_to_Course.pdf)).
 
 
 
-<!-- more -->
+<!--more-->
 
 [Click here](/slides/00-Intro_to_Course.html#1) to open the slides ([PDF](/slides/00-Intro_to_Course.pdf)).
 
