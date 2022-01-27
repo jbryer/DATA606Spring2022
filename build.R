@@ -68,6 +68,11 @@ for(i in 1:nrow(meetups)) {
 		if(!is.na(meetups[i,]$Youtube)) {
 			blogcontent <- paste0(blogcontent, '<iframe width="560" height="315" src="https://www.youtube.com/embed/', meetups[i,]$Youtube, '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
 		}
+
+		additionalcontent <- ''
+		if(!is.na(meetups[i,]$Resources)) {
+			additionalcontent <- meetups[i,]$Resources
+		}
 		
 		pubdate <- as.character(min(as.Date(meetups[i,]$Date), Sys.Date()))
 		
@@ -82,6 +87,7 @@ for(i in 1:nrow(meetups)) {
 			blogcontent, '\n\n',
 			'<!--more-->\n\n',
 			blogcontent, '\n\n',
+			additionalcontent, '\n\n',
 			sep  = '',
 			file = blogfile)
 	}
