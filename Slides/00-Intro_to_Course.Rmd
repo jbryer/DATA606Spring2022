@@ -1,6 +1,6 @@
 ---
-title: "Introduction"
-subtitle: "DATA 606 - Statistics & Probability for Data Analytics"
+title: "Introduction to DATA 606"
+subtitle: "Statistics & Probability for Data Analytics"
 author: Jason Bryer, Ph.D. and Angela Lui, Ph.D.
 date: "Spring 2022"
 knit: (function(inputFile, encoding) { source('myknit.R'); myknit(inputFile, encode); } )
@@ -22,7 +22,7 @@ params:
 editor_options: 
   chunk_output_type: console
 ---
-
+d
 ```{r setup, include = FALSE}
 # remotes::install_github("gadenbuie/countdown")
 # remotes::install_github("mitchelloharawild/icon")
@@ -194,7 +194,7 @@ class: font90
 
 # Meetups
 
-We will have meetups on Wednesday evenings at 8:30pm. 
+We will have meetups on Wednesday evenings at 8:00pm. 
 
 Meetups will be recorded and made available the next day on the [course website](https://spring2022.data606.net/course-overview/meetups/).
 
