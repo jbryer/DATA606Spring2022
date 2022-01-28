@@ -22,7 +22,7 @@ params:
 editor_options: 
   chunk_output_type: console
 ---
-d
+
 ```{r setup, include = FALSE}
 # remotes::install_github("gadenbuie/countdown")
 # remotes::install_github("mitchelloharawild/icon")
