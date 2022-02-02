@@ -53,5 +53,17 @@ Introduction to R and RStudio (Template) Introduction to Data (Template) Probabi
       <description>There will be a midterm and final exam. They will be posted on Blackboard during the time indicated on the course schedule.</description>
     </item>
     
+    <item>
+      <title>Homework</title>
+      <link>/assignments/homework_ungraded/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/assignments/homework_ungraded/</guid>
+      <description>Recommended Homework Questions to Complete for Practice. These will not be graded. The answers are at the end of the textbook. Successfully completing these will help you prepare for the midterm and final exams.
+Chapter 1: 1.09 (p. 20), 1.13 (p. 29), 1.27 (p. 31), 1.33 (p. 35)
+Chapter 2: 2.33 (p. 78), 2.09 (p. 57), 2.15 (p. 59), 2.25 (p. 76)
+Chapter 3: 3.5 (p. 92), 3.7 (p. 93), 3.</description>
+    </item>
+    
   </channel>
 </rss>

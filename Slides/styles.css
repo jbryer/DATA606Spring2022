@@ -8,3 +8,5 @@
   width: 300px !important;
   height: 170px !important;
 }
+.large { font-size: 130% }
+.small { font-size: 70% }
