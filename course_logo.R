@@ -60,6 +60,11 @@ file.copy(paste0(sub(' ', '-', course), '-', sub(' ', '-', semester), '.png'),
 		  'website/static/images/course_logo.png',
 		  overwrite = TRUE)
 
+# Copy file for use on the slides
+file.copy(paste0(sub(' ', '-', course), '-', sub(' ', '-', semester), '.png'),
+		  'Slides/images/hex/DATA606.png',
+		  overwrite = TRUE)
+
 # Save Website icons
 # Can create site favicon here using the square output: https://favicon.io/favicon-converter/
 # To create a w x h image, use this formula: w * 300 / 600

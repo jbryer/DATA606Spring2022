@@ -18,9 +18,6 @@ output:
     includes:
       in_header: [assets/header.html]
       after_body: [assets/insert-logo.html]
-params:
-  github_link: "DATA606Spring2022"
-  one_minute_paper: https://forms.gle/qxRnsCyydx1nf8sXA
 editor_options: 
   chunk_output_type: console
 ---
@@ -29,32 +26,7 @@ editor_options:
 # Some slides are derivative of OpenIntro slides and licensed using CC BY-SA license.
 # https://github.com/OpenIntroStat/openintro-statistics-slides
 
-
-# remotes::install_github("gadenbuie/countdown")
-# remotes::install_github("mitchelloharawild/icon")
-# icon::download_fontawesome()
-# devtools::install_github("thomasp85/patchwork")
-
-library(knitr)
-library(tidyverse)
-library(countdown)
-library(likert)
-
-
-opts_chunk$set(digits = 3)
-
-# This style was adapted from Max Kuhn: https://github.com/rstudio-conf-2020/applied-ml
-# And Rstudio::conf 2020: https://github.com/rstudio-conf-2020/slide-templates/tree/master/xaringan
-# This slide deck shows a lot of the features of Xaringan: https://www.kirenz.com/slides/xaringan-demo-slides.html
-
-# To use, add this to the slide title:   `r I(hexes(c("DATA606")))`
-# It will use images in the images/hex_stickers directory (i.e. the filename is the paramter)
-hexes <- function(x) {
-  x <- rev(sort(x))
-  markup <- function(pkg) glue::glue('<img src="images/hex/{pkg}.png" class="title-hex">')
-  res <- purrr::map_chr(x, markup)
-  paste0(res, collapse = "")
-}
+source('config.R', local = TRUE)
 ```
 
 # Announcements
@@ -63,6 +35,8 @@ hexes <- function(x) {
 * Lab 1 is due Sunday.
 	
 * Labs - When submitting the labs, you can submit just add your answers to the existing document (i.e. you can leave all the text there so you have all the content together).
+
+* We added homework problems to the course website. These will not be graded. The answers are at the end of the textbook. Successfully completing these will help you prepare for the midterm and final exams. https://spring2022.data606.net/assignments/homework_ungraded/
 
 * Link to RStudio cheat sheets: https://rstudio.com/resources/cheatsheets/
 
@@ -247,7 +221,9 @@ These patients had specific characteristics and volunteered to be a part of this
 A census involves collecting data for the entire population of interest. This is problematic for several reasons, including:
 
 * It can be difficult to complete a census: there always seem to be some individuals who are hard to locate or hard to measure. And these difficult-to-find people may have certain characteristics that distinguish them from the rest of the population.
+
 * Populations rarely stand still. Even if you could take a census, the population changes constantly, so it’s never possible to get a perfect measure.
+
 * Taking a census may be more complex than sampling.
 
 Sampling involves measuring a subset of the population of interest, usually randomly.
@@ -443,13 +419,12 @@ ggplot() + geom_histogram(aes(x = mean_differences), bins = 20, fill = 'grey70')
 ```
 ]
 
+
+
 ---
-class: middle, left
 # One Minute Paper
 
-
-Complete the one minute paper: 
-`r params$one_minute_paper`
+Complete the one minute paper: `r one_minute_paper`
 
 1. What was the most important thing you learned during this class?
 
