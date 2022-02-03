@@ -77,7 +77,7 @@ for(i in 1:nrow(meetups)) {
 		pubdate <- as.character(min(as.Date(meetups[i,]$Date), Sys.Date()))
 		
 		cat('---', '\n',
-			'title: "', meetups[1,]$Topic, '"\n',
+			'title: "', meetups[i,]$Topic, '"\n',
 			'author: "Jason Bryer"', '\n',
 			'date: ', pubdate, '\n',
 			'draft: false', '\n',

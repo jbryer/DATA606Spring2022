@@ -1,5 +1,5 @@
 ---
-title: "Intro to the Course"
+title: "Intro to Data"
 author: "Jason Bryer"
 date: 2022-02-02
 draft: false
