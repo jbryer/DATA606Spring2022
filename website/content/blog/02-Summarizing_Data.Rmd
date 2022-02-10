@@ -1,0 +1,22 @@
+---
+title: "Summarizing Data"
+author: "Jason Bryer"
+date: 2022-02-09
+draft: false
+categories: ["Meetups"]
+tags: ["Annoucement"]
+---
+
+
+[Click here](/slides/02-Summarizing_Data.html#1) to open the slides ([PDF](/slides/02-Summarizing_Data.pdf)).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iZTL3Y_vX3w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!--more-->
+
+[Click here](/slides/02-Summarizing_Data.html#1) to open the slides ([PDF](/slides/02-Summarizing_Data.pdf)).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iZTL3Y_vX3w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
