@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Foundation for Inference Part 1</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jason Bryer, Ph.D. and Angela Lui, Ph.D." />
+    <meta name="date" content="2022-03-02" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/mtheme_max.css" type="text/css" />
+    <link rel="stylesheet" href="assets/fonts_mtheme_max.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Foundation for Inference Part 1
+## DATA 606 - Statistics &amp; Probability for Data Analytics
+### Jason Bryer, Ph.D. and Angela Lui, Ph.D.
+### March 2, 2022
+
+---
+
+
+
+
+# One Minute Paper Results
+
+
+
+.pull-left[
+**What was the most important thing you learned during this class?**
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+**What important question remains unanswered for you?**
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+class: center, middle, inverse
+# Crash Course in Calculus 
+
+---
+class: font90
+# Crash Course in Calculus
+
+There are three major concepts in calculus that will be helpful to understand:
+
+**Limits** - the value that a function (or sequence) approaches as the input (or index) approaches some value.
+
+**Derivatives** - the slope of the line tangent at any given point on a function.
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
+**Integrals** - the area under the curve.
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url(images/derivative_1.jpg)
+background-size: contain
+# Derivatives
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Source: &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;@allison_horst&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+---
+background-image: url(images/derivative_2.jpg)
+background-size: contain
+# Derivatives
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Source: &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;@allison_horst&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+---
+background-image: url(images/derivative_3.jpg)
+background-size: contain
+# Derivatives
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Source: &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;@allison_horst&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+---
+background-image: url(images/derivative_4.jpg)
+background-size: contain
+# Derivatives
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Source: &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;@allison_horst&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+---
+background-image: url(images/derivative_5.jpg)
+background-size: contain
+# Derivatives
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Source: &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;@allison_horst&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+---
+background-image: url(images/derivative_6.jpg)
+background-size: contain
+# Derivatives
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Source: &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;@allison_horst&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+---
+background-image: url(images/derivative_7.jpg)
+background-size: contain
+# Derivatives
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Source: &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;@allison_horst&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+---
+background-image: url(images/derivative_8.jpg)
+background-size: contain
+# Derivatives
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Source: &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;@allison_horst&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+---
+background-image: url(images/derivative_9.jpg)
+background-size: contain
+# Derivatives
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Source: &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;@allison_horst&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+---
+# Function for Normal Distribution
+
+`$$f\left( x|\mu ,\sigma  \right) =\frac { 1 }{ \sigma \sqrt { 2\pi  }  } { e }^{ -\frac { { \left( x-\mu  \right)  }^{ 2 } }{ { 2\sigma  }^{ 2 } }  }$$`
+
+
+```r
+f &lt;- function(x, mean = 0, sigma = 1) {
+	1 / (sigma * sqrt(2 * pi)) * exp(1)^(-1/2 * ( (x - mean) / sigma )^2)
+}
+```
+
+
+```r
+min &lt;- 0; max &lt;- 2
+ggplot() + stat_function(fun = f) + xlim(c(-4, 4)) + 
+	geom_vline(xintercept = c(min, max), color = 'blue', linetype = 2) + xlab('x')
+```
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Reimann Sums
+
+One strategy to find the area between two values is to draw a series of rectangles. Given *n* rectangles, we know that the width of each is `\(\frac{2 - 0}{n}\)` and the height is `\(f(x)\)`. Here is an example with 3 rectangles.
+
+
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Reimann Sums (10 rectangles)
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Reimann Sums (30 rectangles)
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Reimann Sums (300 rectangles)
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# `\(n\rightarrow \infty\)`
+
+As *n* approaches infinity we are going to get the *exact* value for the area under the curve. This notion of letting a value get increasingly close to infinity, zero, or any other value, is called the **limit**.
+
+The area under a function is called the integral.
+
+
+```r
+integrate(f, 0, 2)
+```
+
+```
+## 0.4772499 with absolute error &lt; 5.3e-15
+```
+
+
+```r
+DATA606::shiny_demo('calculus')
+```
+
+---
+# Normal Distribution
+
+
+```r
+normal_plot(cv = c(0, 2))
+```
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+
+```r
+pnorm(2) - pnorm(0)
+```
+
+```
+## [1] 0.4772499
+```
+
+---
+# R's built in functions for working with distributions
+
+
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+
+.font70[See https://github.com/jbryer/DATA606Fall2021/blob/master/R/distributions.R]
+
+---
+class: center, middle, inverse
+# Foundation for Inference 
+
+
+---
+# Population Distribution (Uniform)
+
+
+```r
+n &lt;- 1e5
+pop &lt;- runif(n, 0, 1)
+mean(pop)
+```
+
+```
+## [1] 0.5006827
+```
+
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Random Sample (n=10)
+
+
+```r
+samp1 &lt;- sample(pop, size=10)
+mean(samp1)
+```
+
+```
+## [1] 0.4818356
+```
+
+
+```r
+hist(samp1)
+```
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Random Sample (n=30)
+
+
+```r
+samp2 &lt;- sample(pop, size=30)
+mean(samp2)
+```
+
+```
+## [1] 0.4161291
+```
+
+
+
+```r
+hist(samp2)
+```
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Lots of Random Samples
+
+
+```r
+M &lt;- 1000
+samples &lt;- numeric(length=M)
+for(i in seq_len(M)) {
+	samples[i] &lt;- mean(sample(pop, size=30))
+}
+head(samples, n=8)
+```
+
+```
+## [1] 0.6152609 0.4635704 0.5176977 0.5371314 0.5354912 0.4833082 0.4613639
+## [8] 0.4991360
+```
+
+
+---
+# Sampling Distribution
+
+
+
+```r
+hist(samples)
+```
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+# Central Limit Theorem (CLT)
+
+Let `\(X_1\)`, `\(X_2\)`, ..., `\(X_n\)` be independent, identically distributed random variables with mean `\(\mu\)` and variance `\(\sigma^2\)`, both finite. Then for any constant `\(z\)`,
+
+$$ \underset { n\rightarrow \infty  }{ lim } P\left( \frac { \bar { X } -\mu  }{ \sigma /\sqrt { n }  } \le z \right) =\Phi \left( z \right)  $$
+
+where `\(\Phi\)` is the cumulative distribution function (cdf) of the standard normal distribution.
+
+
+---
+# In other words...
+
+The distribution of the sample mean is well approximated by a normal model:
+
+$$ \bar { x } \sim N\left( mean=\mu ,SE=\frac { \sigma  }{ \sqrt { n }  }  \right)  $$
+
+where SE represents the **standard error**, which is defined as the standard deviation of the sampling distribution. In most cases `\(\sigma\)` is not known, so use `\(s\)`.
+
+
+---
+# CLT Shiny App
+
+
+```r
+library(DATA606)
+shiny_demo('sampdist')
+shiny_demo('CLT_mean')
+```
+
+---
+# Standard Error
+
+
+```r
+samp2 &lt;- sample(pop, size=30)
+mean(samp2)
+```
+
+```
+## [1] 0.4105147
+```
+
+```r
+(samp2.se &lt;- sd(samp2) / sqrt(length(samp2)))
+```
+
+```
+## [1] 0.04753127
+```
+
+---
+# Confidence Interval
+
+The confidence interval is then `\(\mu \pm CV \times SE\)` where CV is the critical value. For a 95% confidence interval, the critical value is ~1.96 since
+
+`$$\int _{ -1.96 }^{ 1.96 }{ \frac { 1 }{ \sigma \sqrt { 2\pi  }  } { d }^{ -\frac { { \left( x-\mu  \right)  }^{ 2 } }{ 2{ \sigma  }^{ 2 } }  } } \approx 0.95$$`
+
+
+```r
+qnorm(0.025) # Remember we need to consider the two tails, 2.5% to the left, 2.5% to the right.
+```
+
+```
+## [1] -1.959964
+```
+
+
+```r
+(samp2.ci &lt;- c(mean(samp2) - 1.96 * samp2.se, mean(samp2) + 1.96 * samp2.se))
+```
+
+```
+## [1] 0.3173534 0.5036760
+```
+
+
+---
+# Confidence Intervals (cont.)
+
+We are 95% confident that the true population mean is between 0.3173534, 0.503676. 
+
+That is, if we were to take 100 random samples, we would expect at least 95% of those samples to have a mean within 0.3173534, 0.503676.
+
+
+```r
+ci &lt;- data.frame(mean=numeric(), min=numeric(), max=numeric())
+for(i in seq_len(100)) {
+	samp &lt;- sample(pop, size=30)
+	se &lt;- sd(samp) / sqrt(length(samp))
+	ci[i,] &lt;- c(mean(samp),
+				mean(samp) - 1.96 * se, 
+				mean(samp) + 1.96 * se)
+}
+ci$sample &lt;- 1:nrow(ci)
+ci$sig &lt;- ci$min &lt; 0.5 &amp; ci$max &gt; 0.5
+```
+
+
+---
+# Confidence Intervals 
+
+
+```r
+ggplot(ci, aes(x=min, xend=max, y=sample, yend=sample, color=sig)) + 
+	geom_vline(xintercept=0.5) + 
+	geom_segment() + xlab('CI') + ylab('') +
+	scale_color_manual(values=c('TRUE'='grey', 'FALSE'='red'))
+```
+
+&lt;img src="05-Foundation_for_Inference_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: left, font140
+# One Minute Paper
+
+Complete the one minute paper: 
+https://forms.gle/qxRnsCyydx1nf8sXA
+
+1. What was the most important thing you learned during this class?
+2. What important question remains unanswered for you?
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLanguage": "R",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<!-- Source: https://www.garrickadenbuie.com/blog/xaringan-tip-logo-all-slides/ -->
+<style>
+.logo {
+  background-image: url(images/hex/DATA606.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 2em;
+  right: 0.5em;
+  width: 55px;
+  height: 64px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

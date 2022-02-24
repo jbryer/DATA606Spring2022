@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Foundation for Inference Part 2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jason Bryer, Ph.D. and Angela Lui, Ph.D." />
+    <meta name="date" content="2022-03-09" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/mtheme_max.css" type="text/css" />
+    <link rel="stylesheet" href="assets/fonts_mtheme_max.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Foundation for Inference Part 2
+## DATA 606 - Statistics &amp; Probability for Data Analytics
+### Jason Bryer, Ph.D. and Angela Lui, Ph.D.
+### March 9, 2022
+
+---
+
+
+
+
+
+---
+# Data Project Proposal
+
+Due October 31&lt;sup&gt;st&lt;/sup&gt;ish Select a dataset that interests you. For the proposal, you need to answer the questions below.
+
+.font80[
+* Research question
+* What type of statistical test do you plan to do (e.g. t-test, ANOVA, regression, logistic regression, chi-squared, etc.)
+* What are the cases, and how many are there?
+* Describe the method of data collection.
+* What type of study is this (observational/experiment)?
+* Data Source: If you collected the data, state self-collected. If not, provide a citation/link.
+* Response: What is the response variable, and what type is it (numerical/categorical)?
+* Explanatory: What is the explanatory variable(s), and what type is it (numerical/categorical)?
+* Relevant summary statistics
+]
+
+More information including template and suggested datasets located here: https://fall2021.data606.net/assignments/project/
+
+---
+# One Minute Paper Results
+
+
+
+.pull-left[
+**What was the most important thing you learned during this class?**
+
+```
+## NULL
+```
+]
+.pull-right[
+**What important question remains unanswered for you?**
+
+```
+## NULL
+```
+]
+
+
+---
+# Population Distribution (Uniform)
+
+
+```r
+n &lt;- 1e5
+pop &lt;- runif(n, 0, 1)
+mean(pop)
+```
+
+```
+## [1] 0.4990114
+```
+
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Random Sample (n=30)
+
+
+```r
+samp2 &lt;- sample(pop, size=30)
+mean(samp2)
+```
+
+```
+## [1] 0.5086801
+```
+
+
+
+```r
+hist(samp2)
+```
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: center, middle, inverse
+# Null Hypothesis Testing
+
+---
+# Hypothesis Testing
+
+* We start with a null hypothesis ( `\(H_0\)` ) that represents the status quo.
+
+* We also have an alternative hypothesis ( `\(H_A\)` ) that represents our research question, i.e. what we're testing for.
+
+* We conduct a hypothesis test under the assumption that the null hypothesis is true, either via simulation or traditional methods based on the central limit theorem.
+
+* If the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, we stick with the null hypothesis. If they do, then we reject the null hypothesis in favor of the alternative.
+
+
+---
+# Hypothesis Testing (using CI)
+
+`\(H_0\)`: The mean of `samp2` = 0.5  
+`\(H_A\)`: The mean of `samp2` `\(\ne\)` 0.5
+
+Using confidence intervals, if the *null* value is within the confidence interval, then we *fail* to reject the *null* hypothesis.
+
+
+```r
+(samp2.ci &lt;- c(mean(samp2) - 2 * sd(samp2) / sqrt(length(samp2)),
+			   mean(samp2) + 2 * sd(samp2) / sqrt(length(samp2))))
+```
+
+```
+## [1] 0.4001804 0.6171798
+```
+
+Since 0.5 fall within 0.4001804, 0.6171798, we *fail* to reject the null hypothesis.
+
+
+---
+# Hypothesis Testing (using *p*-values)
+
+$$ \bar { x } \sim N\left( mean=0.49,SE=\frac { 0.27 }{ \sqrt { 30 } = 0.049 }  \right)  $$
+
+$$ Z=\frac { \bar { x } -null }{ SE } =\frac { 0.49-0.50 }{ 0.049 } = -.204081633 $$
+
+
+```r
+pnorm(-.204) * 2
+```
+
+```
+## [1] 0.8383535
+```
+
+---
+# Hypothesis Testing (using *p*-values)
+
+
+
+```r
+DATA606::normal_plot(cv = c(.204), tails = 'two.sided')
+```
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Type I and II Errors
+
+There are two competing hypotheses: the null and the alternative. In a hypothesis test, we make a decision about which might be true, but our choice might be incorrect.
+
+
+
+|                    | fail to reject H&lt;sub&gt;0&lt;/sub&gt; | reject H&lt;sub&gt;0&lt;/sub&gt; |
+|--------------------|:----------------------------:|:--------------------:|
+| H&lt;sub&gt;0&lt;/sub&gt; true |        	&amp;#10004;            |  Type I Error        |
+| H&lt;sub&gt;A&lt;/sub&gt; true |     Type II Error            |      	&amp;#10004;       |
+
+
+&lt;br /&gt;&lt;br /&gt;
+
+* Type I Error: **Rejecting** the null hypothesis when it is **true**.
+* Type II Error: **Failing to reject** the null hypothesis when it is **false**.
+
+
+---
+# Hypothesis Test
+
+If we again think of a hypothesis test as a criminal trial then it
+makes sense to frame the verdict in terms of the null and
+alternative hypotheses:
+
+&lt;p style="padding-left:150px"&gt;
+H&lt;sub&gt;0&lt;/sub&gt; : Defendant is innocent&lt;br/&gt;
+H&lt;sub&gt;A&lt;/sub&gt; : Defendant is guilty
+&lt;/p&gt;
+
+Which type of error is being committed in the following
+circumstances?
+
+* Declaring the defendant innocent when they are actually guilty  
+&lt;center&gt;Type 2 error&lt;/center&gt;
+
+* Declaring the defendant guilty when they are actually innocent  
+&lt;center&gt;Type 1 error&lt;/center&gt;
+
+Which error do you think is the worse error to make? 
+
+
+---
+# Null Distribution
+
+
+```r
+(cv &lt;- qnorm(0.05, mean=0, sd=1, lower.tail=FALSE))
+```
+
+```
+## [1] 1.644854
+```
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Alternative Distribution
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+
+```r
+pnorm(cv, mean=cv, lower.tail = FALSE)
+```
+
+```
+## [1] 0.5
+```
+
+---
+# Another Example (mu = 2.5)
+
+.pull-left[
+
+```r
+mu &lt;- 2.5
+(cv &lt;- qnorm(0.05, 
+			 mean=0, 
+			 sd=1, 
+			 lower.tail=FALSE))
+```
+
+```
+## [1] 1.644854
+```
+]
+.pull-right[
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-16-2.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Numeric Values
+
+Type I Error
+
+
+```r
+pnorm(mu, mean=0, sd=1, lower.tail=FALSE)
+```
+
+```
+## [1] 0.006209665
+```
+
+Type II Error
+
+
+```r
+pnorm(cv, mean=mu, lower.tail = TRUE)
+```
+
+```
+## [1] 0.1962351
+```
+
+---
+# Shiny Application
+
+Visualizing Type I and Type II errors: [https://bcdudek.net/betaprob/](https://bcdudek.net/betaprob/)
+
+---
+# Why p &lt; 0.05?
+
+Check out this page: https://r.bryer.org/shiny/Why05/
+
+See also:
+
+Kelly M. [*Emily Dickinson and monkeys on the stair Or: What is the significance of the 5% significance level?*](http://www.acsu.buffalo.edu/~grant/5pcMarkKelley.pdf) Significance 10:5. 2013.
+
+
+---
+# Statistical vs. Practical Significance
+
+* Real differences between the point estimate and null value are easier to detect with larger samples.
+
+* However, very large samples will result in statistical significance even for tiny differences between the sample mean and the null value (effect size), even when the difference is not practically significant.
+
+* This is especially important to research: if we conduct a study, we want to focus on finding meaningful results (we want observed differences to be real, but also large enough to matter).
+
+* The role of a statistician is not just in the analysis of data, but also in planning and design of a study.
+
+---
+class: center, middle, inverse
+# Bootstrapping 
+
+
+---
+# Bootstrapping
+
+* First introduced by Efron (1979) in [*Bootstrap Methods: Another Look at the Jackknife*](https://projecteuclid.org/euclid.aos/1176344552).
+
+* Estimates confidence of statistics by resampling *with* replacement.
+
+* The *bootstrap sample* provides an estimate of the sampling distribution.
+
+* The `boot` R package provides a framework for doing bootstrapping: https://www.statmethods.net/advstats/bootstrapping.html
+
+---
+# Bootstrapping Example (Population)
+
+Define our population with a uniform distribution.
+
+
+```r
+n &lt;- 1e5
+pop &lt;- runif(n, 0, 1)
+mean(pop)
+```
+
+```
+## [1] 0.4984271
+```
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Bootstrapping Example (Sample)
+
+We observe one random sample from the population.
+
+
+```r
+samp1 &lt;- sample(pop, size = 50)
+```
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Bootsrapping Example (Estimate)
+
+
+```r
+boot.samples &lt;- numeric(1000) # 1,000 bootstrap samples
+for(i in seq_along(boot.samples)) { 
+	tmp &lt;- sample(samp1, size = length(samp1), replace = TRUE)
+	boot.samples[i] &lt;- mean(tmp)
+}
+head(boot.samples)
+```
+
+```
+## [1] 0.4577224 0.5202220 0.5106397 0.4871309 0.4624648 0.5007866
+```
+
+---
+# Bootsrapping Example (Distribution)
+
+
+```r
+d &lt;- density(boot.samples)
+h &lt;- hist(boot.samples, plot=FALSE)
+hist(boot.samples, main='Bootstrap Distribution', xlab="", freq=FALSE, 
+     ylim=c(0, max(d$y, h$density)+.5), col=COL[1,2], border = "white", 
+	 cex.main = 1.5, cex.axis = 1.5, cex.lab = 1.5)
+lines(d, lwd=3)
+```
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# 95% confidence interval
+
+
+```r
+c(mean(boot.samples) - 1.96 * sd(boot.samples), 
+  mean(boot.samples) + 1.96 * sd(boot.samples))
+```
+
+```
+## [1] 0.4164288 0.5837527
+```
+
+---
+# Bootstrapping is not just for means!
+
+
+```r
+boot.samples.median &lt;- numeric(1000) # 1,000 bootstrap samples
+for(i in seq_along(boot.samples.median)) { 
+	tmp &lt;- sample(samp1, size = length(samp1), replace = TRUE)
+	boot.samples.median[i] &lt;- median(tmp) # NOTICE WE ARE NOW USING THE median FUNCTION!
+}
+head(boot.samples.median)
+```
+
+```
+## [1] 0.5125796 0.3676660 0.5125796 0.5404895 0.5125796 0.5404895
+```
+
+95% confidence interval for the median
+
+
+```r
+c(mean(boot.samples.median) - 1.96 * sd(boot.samples.median), 
+  mean(boot.samples.median) + 1.96 * sd(boot.samples.median))
+```
+
+```
+## [1] 0.3728934 0.6493538
+```
+
+---
+class: inverse, middle, center
+# Review
+
+
+---
+# Review: Sampling Distribution
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Review: Sampling Distribution
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Review: Sampling Distribution
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Review: Add Bootstrap Distribution
+
+&lt;img src="05-Foundation_for_Inference2_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+class: left, font140
+# One Minute Paper
+
+Complete the one minute paper: 
+https://forms.gle/qxRnsCyydx1nf8sXA
+
+1. What was the most important thing you learned during this class?
+2. What important question remains unanswered for you?
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLanguage": "R",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<!-- Source: https://www.garrickadenbuie.com/blog/xaringan-tip-logo-all-slides/ -->
+<style>
+.logo {
+  background-image: url(images/hex/DATA606.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 2em;
+  right: 0.5em;
+  width: 55px;
+  height: 64px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

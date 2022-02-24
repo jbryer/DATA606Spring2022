@@ -1,0 +1,488 @@
+---
+title: "(Graphical) Analysis of Variance"
+subtitle: "DATA 606 - Statistics & Probability for Data Analytics"
+author: Jason Bryer, Ph.D.
+date: "March 23, 2022"
+output:
+  xaringan::moon_reader:
+    css: ["assets/mtheme_max.css", "assets/fonts_mtheme_max.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: solarized-light
+      highlightLanguage: R
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      navigation:
+        scroll: false
+    includes:
+      in_header: [assets/header.html]
+      after_body: [assets/insert-logo.html]
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+# Cartoons from https://github.com/allisonhorst/stats-illustrations
+# dplyr based upon https://allisonhorst.shinyapps.io/dplyr-learnr/#section-welcome
+
+source('config.R')
+```
+
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+require(ggplot2)
+require(psych)
+require(granova)
+require(granovaGG)
+hand <- read.csv('../course_data/Hand_washing.csv')
+```
+
+
+```{r, eval = FALSE, echo = FALSE}
+hand[hand$Method == 'Alcohol Spray',]$Bacterial.Counts <- hand[hand$Method == 'Alcohol Spray',]$Bacterial.Counts + 50
+```
+
+---
+# Analysis of Variance (ANOVA)
+
+The goal of ANOVA is to test whether there is a discernible difference between the means of several groups.
+
+---
+# Hand Washing Example
+
+Is there a difference between washing hands with:  water only, regular soap, antibacterial soap (ABS), and antibacterial spray (AS)?
+
+* Each tested with 8 replications
+* Treatments randomly assigned
+
+For ANOVA:
+
+* The means all differ.
+* Is this just natural variability?
+* Null hypothesis:  All the means are the same.
+* Alternative hypothesis:  The means are not all the same.
+
+Source: De Veaux, R.D., Velleman, P.F., & Bock, D.E. (2014). *Intro Stats, 4th Ed.* Pearson.
+
+---
+class: font90
+# Descriptive Statistics
+
+```{r}
+desc <- psych::describeBy(hand$Bacterial.Counts, group = hand$Method, mat = TRUE, skew = FALSE)
+names(desc)[2] <- 'Method' # Rename the grouping column
+desc$Var <- desc$sd^2 # We will need the variance latter, so calculate it here
+desc
+```
+
+.pull-left[
+```{r}
+( k <- length(unique(hand$Method)) )
+( n <- nrow(hand) )
+```
+]
+.pull-right[
+```{r}
+( grand_mean <- mean(hand$Bacterial.Counts) )
+( grand_var <- var(hand$Bacterial.Counts) )
+( pooled_var <- mean(desc$Var) )
+```
+]
+
+---
+# Hand Washing Comparison 
+
+
+```{r hand-boxplot, fig.height=6, tidy=FALSE}
+ggplot(hand, aes(x = Method, y = Bacterial.Counts)) + 
+	geom_point(aes(color = Method), shape = 1) +
+	stat_summary(geom = 'point', fun = mean, size = 6, aes(color = Method))
+```
+
+---
+# Contrasts
+
+A contrast is a linear combination of 2 or more factor level means with coefficients that sum to zero.
+
+```{r}
+desc$contrast <- (desc$mean - mean(desc$mean))
+mean(desc$contrast) # Should be 0!
+desc
+hand <- merge(hand, desc[,c('Method', 'contrast', 'mean')], by = 'Method', all.x = TRUE)
+```
+
+---
+# Plotting using contrasts
+
+```{r}
+xlim <- c(-1.1 * diff(range(hand$Bacterial.Counts)) / 2, 
+		  1.1 * diff(range(hand$Bacterial.Counts)) / 2)
+ylim <- c(1.1 * (grand_mean - diff(range(hand$Bacterial.Counts)) / 2), 
+		  1.1 * (grand_mean + diff(range(hand$Bacterial.Counts)) / 2))
+p <- ggplot(hand, aes(x = contrast, y = Bacterial.Counts)) + 
+	geom_point(aes(color = Method), shape = 1) +
+	stat_summary(geom = 'point', fun = mean, size = 6, aes(color = Method)) +
+	coord_equal() +
+	xlim(xlim) + ylim(ylim)
+```
+
+---
+# Plotting using contrasts
+
+```{r, echo = FALSE}
+p
+```
+---
+# Unit Line (slope = 1, intercept = $\bar{x}$)
+
+```{r}
+( p <- p  + geom_abline(slope = 1, intercept = mean(hand$Bacterial.Counts)) )
+```
+
+---
+# Grand Mean
+
+```{r}
+( p <- p + geom_hline(yintercept = grand_mean, linetype = 2) +
+	       geom_vline(xintercept = 0, linetype = 2) )
+```
+
+---
+# Overall
+
+```{r}
+```
+
+---
+# Grand Variance
+
+```{r}
+( p + geom_rect(xmin = 0 - sqrt(grand_var), ymin = grand_mean - sqrt(grand_var),
+			    xmax = 0 + sqrt(grand_var), ymax = grand_mean + sqrt(grand_var),
+			    color = 'blue', linetype = 2, fill = 'blue', alpha = 0.005) )
+```
+
+---
+# Group Variances
+
+```{r}
+df_rect_within <- hand %>%
+	mutate(square = (Bacterial.Counts - mean)^2) %>%
+	group_by(Method) %>%
+	summarize(contrast = mean(Bacterial.Counts) - grand_mean,
+			  mean = mean(Bacterial.Counts),
+			  MS = sum(square) / (n() - 1)) %>%
+	mutate(xmin = contrast - sqrt(MS),
+		   xmax = contrast + sqrt(MS),
+		   ymin = mean - sqrt(MS),
+		   ymax = mean + sqrt(MS))
+df_rect_within
+```
+
+---
+# Group Variances
+
+```{r}
+p + geom_segment(data = desc, aes(x = contrast, xend = contrast, y = mean - sd, yend = mean + sd), alpha = 0.6) +
+	geom_rect(data = df_rect_within, aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, y = 0, color = Method),
+			  alpha = 0.005, linetype = 2) + scale_color_brewer(type = 'qual', palette = 7)
+```
+
+---
+# Between Group Variance (treatment)
+
+$$SS_{between} = \sum^{}_{k} n_{k}(\bar{x}_{k} -\bar{x} )^{2}$$
+
+```{r}
+( df_between <- k - 1 )
+( ss_between <- sum(desc$n * (desc$mean - grand_mean)^2) )
+( MS_between <- ss_between / df_between )
+```
+
+---
+# Between Group Variance (treatment)
+
+```{r}
+p + geom_rect(xmin = 0 - sqrt(MS_between), ymin = grand_mean - sqrt(MS_between),
+			  xmax = 0 + sqrt(MS_between), ymax = grand_mean + sqrt(MS_between),
+			  color = 'darkgreen', linetype = 2, fill = 'green', alpha = 0.005)
+```
+
+---
+# Group Variances (cont.)
+
+```{r}
+```
+
+---
+# Within Group Variance (error)
+
+$$SS_{within} = \sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x}_{k} )^{2}$$
+
+.pull-left[
+```{r}
+( df_total <- n - 1)
+( ss_total <- sum((hand$Bacterial.Counts-grand_mean)^2) )
+( MS_total <- ss_total / df_total )
+```
+]
+.pull-right[
+```{r}
+( df_within <- n - k )
+( ss_within <- ss_total - ss_between )
+( MS_within <- ss_within / df_within )
+```
+]
+
+---
+# Within Group Variance (error)
+
+```{r}
+p + geom_rect(xmin = 0 - sqrt(MS_within), ymin = grand_mean - sqrt(MS_within),
+			  xmax = 0 + sqrt(MS_within), ymax = grand_mean + sqrt(MS_within),
+			  color = 'red', linetype = 2, fill = 'red', alpha = 0.005)
+```
+
+---
+# Within group variance is the average varance across groups
+```{r}
+mean( (df_rect_within$ymax - df_rect_within$ymin) * (df_rect_within$xmax - df_rect_within$xmin) ) / k
+MS_within
+p2 <- p + geom_rect(xmin = 0 - sqrt(MS_within), ymin = grand_mean - sqrt(MS_within),
+			  xmax = 0 + sqrt(MS_within), ymax = grand_mean + sqrt(MS_within),
+			  color = 'red', linetype = 2, fill = 'red', alpha = 0.005) +
+	geom_rect(data = df_rect_within, aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, y = 0, color = Method),
+			  alpha = 0.005, linetype = 2) + scale_color_brewer(type = 'qual', palette = 7)
+
+```
+
+---
+# Within group variance is the average varance across groups
+
+```{r, echo = FALSE}
+p2
+```
+
+
+---
+# $MS_{Between} / MS_{Within}$ = F-Statistic
+
+Mean squares can be represented as squares, hence the ratio of area of the two rectagles is equal to \frac{MS_{Between}}{MS_{Within}} which is the F-statistic.
+
+```{r, echo = FALSE}
+p + geom_rect(xmin = 0 - sqrt(MS_within), ymin = grand_mean - sqrt(MS_within),
+			  xmax = 0 + sqrt(MS_within), ymax = grand_mean + sqrt(MS_within),
+			  color = 'red', linetype = 2, fill = 'red', alpha = 0.005) +
+	geom_rect(xmin = 0 - sqrt(MS_between), ymin = grand_mean - sqrt(MS_between),
+			  xmax = 0 + sqrt(MS_between), ymax = grand_mean + sqrt(MS_between),
+			  color = 'darkgreen', linetype = 2, fill = 'green', alpha = 0.005)
+
+```
+
+
+---
+class: font110
+# Hand Washing Comparison (cont.) 
+
+```{r, tidy=FALSE}
+desc <- describeBy(hand$Bacterial.Counts, hand$Method, mat=TRUE, skew = FALSE)
+desc$Var <- desc$sd^2
+print(desc, row.names=FALSE)
+
+mean(desc$Var)
+
+var(hand$Bacterial.Counts)
+```
+
+
+---
+# Washing type all the same?
+
+$H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4$
+
+Variance components we need to evaluate the null hypothesis:
+
+* Between Sum of Squares: $SS_{between} = \sum^{}_{k} n_{k}(\bar{x}_{k} -\bar{x} )^{2}$
+
+* Within Sum of Squares: $SS_{within} = \sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x}_{k} )^{2}$
+
+* Between degrees of freedom: $df_{between} =  k - 1$ (k = number of groups)
+
+* Within degrees of freedom: $df_{within} =  k(n - 1)$
+
+* Mean square between (aka treatment): $MS_{T} = \frac{SS_{between}}{df_{between}}$
+
+* Mean square within (aka error): $MS_{E} = \frac{SS_{within}}{df_{within}}$
+
+
+```{r, eval=FALSE, echo=FALSE}
+( ss_between <- sum(desc$n * (desc$mean - mean(hand$Bacterial.Counts))^2) )
+( ss_within <- sum((tmp$Bacterial.Counts - tmp$mean)^2) )
+( ss_total <- sum((hand$Bacterial.Counts - mean(hand$Bacterial.Counts))^2) )
+tmp <- merge(hand, desc[,c('group1','mean')], by.x = 'Method', by.y = 'group1')
+ss_between + ss_within == ss_total # Verify everything adds up
+var(hand$Bacterial.Counts) / 4
+```
+
+
+---
+# Comparing $MS_T$ (between) and $MS_E$ (within)
+
+.pull-left[
+Assume each washing method has the same variance.
+
+Then we can pool them all together to get the pooled variance ${ s }_{ p }^{ 2 }$
+
+Since the sample sizes are all equal, we can average the four variances: ${ s }_{ p }^{ 2 } = `r prettyNum(mean(desc$Var), digits = 6)`$
+
+```{r}
+mean(desc$Var)
+```
+]
+
+--
+
+.pull-right[
+$MS_T$
+
+* Estimates ${ s }_{ p }^{ 2 }$ if $H_0$ is true
+* Should be larger than ${ s }_{ p }^{ 2 }$ if $H_0$ is false
+
+$MS_E$
+
+* Estimates ${ s }_{ p }^{ 2 }$ whether $H_0$ is true or not
+* If $H_0$ is true, both close to ${ s }_{ p }^{ 2 }$, so $MS_T$ is close to $MS_E$
+
+Comparing
+
+* If $H_0$ is true, $\frac{MS_T}{MS_E}$ should be close to 1
+* If $H_0$ is false, $\frac{MS_T}{MS_E}$ tends to be > 1
+]
+
+---
+class: font120
+# The F-Distribution 
+
+* How do we tell whether $\frac{MS_T}{MS_E}$ is larger enough to not be due just to random chance?
+
+* $\frac{MS_T}{MS_E}$ follows the F-Distribution
+	* Numerator df:  k - 1 (k = number of groups)
+	* Denominator df:  k(n - 1)  
+	* n = # observations in each group
+	
+* $F = \frac{MS_T}{MS_E}$ is called the F-Statistic.
+
+A Shiny App by Dr. Dudek to explore the F-Distribution: <a href='https://shiny.rit.albany.edu/stat/fdist/' window='_new'>https://shiny.rit.albany.edu/stat/fdist/</a>
+
+---
+# The F-Distribution (cont.) 
+
+```{r fdistribution, fig.width=10, fig.height=6, tidy=FALSE, eval=FALSE}
+df.numerator <- 4 - 1
+df.denominator <- 4 * (8 - 1)
+DATA606::F_plot(df.numerator, df.denominator, cv = qf(0.95, df.numerator, df.denominator))
+```
+
+
+---
+class: font120
+# ANOVA Table
+
+
+| Source                  | Sum of Squares                                              | *df*  | MS                                   | F                                   | p                              |
+| ------------------------|:-----------------------------------------------------------:|:-----:|:------------------------------------:|:-----------------------------------:|--------------------------------|
+| Between Group (Treatment) | $\sum^{}_{k} n_{k}(\bar{x}_{k} -\bar{x} )^{2}$              | k - 1 | $\frac{SS_{between}}{df_{between}}$  | $\frac{MS_{between}}{MS_{within}}$  | area to right of $F_{k-1,n-k}$ |
+| Within Group (Error)    | $\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x}_{k} )^{2}$  | n - k | $\frac{SS_{within}}{df_{within}}$    |                                     |                                |
+| Total                   | $\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x} )^{2}$      | n - 1 |                                      |                                     |                                |
+
+---
+class: code90
+# ANOVA Steps
+
+
+```{r}
+(grand.mean <- mean(hand$Bacterial.Counts))
+(n <- nrow(hand))
+(k <- length(unique(hand$Method)))
+(ss.total <- sum((hand$Bacterial.Counts - grand.mean)^2))
+```
+
+---
+# ANOVA Steps
+
+.pull-left[
+### Between Groups
+```{r}
+(df.between <- k - 1)
+(ss.between <- sum(desc$n * 
+		(desc$mean - grand.mean)^2))
+(MS.between <- ss.between / df.between)
+```
+]
+.pull-right[
+### Within Groups
+```{r}
+(df.within <- n - k)
+(ss.within <- ss.total - ss.between)
+(MS.within <- ss.within / df.within)
+```
+]
+
+
+---
+# F Statistic
+
+
+* $MS_T = `r prettyNum(MS.between, digits = 6)`$
+
+* $MS_E = `r prettyNum(MS.within, digits = 6)`$
+
+* Numerator df = 4 - 1 = 3
+
+* Denominator df = 4(8 - 1) = 28.
+
+
+```{r}
+(f.stat <- 9960.64 / 1410.14)
+1 - pf(f.stat, 3, 28)
+```
+
+P-value for $F_{3,28} \approx 0.0011$
+
+---
+# F Distribution
+
+```{r}
+# DATA606::F_plot(df.numerator, df.denominator, cv = f.stat)
+```
+
+---
+# Assumptions and Conditions
+
+* To check the assumptions and conditions for ANOVA, always look at  the side-by-side boxplots.
+	* Check for outliers within any group.
+	* Check for similar spreads.
+	* Look for skewness.
+	* Consider re-expressing.
+	
+* Independence Assumption
+	* Groups must be independent of each other.
+	* Data within each group must be independent.
+	* Randomization Condition
+	
+* Equal Variance Assumption
+	* In ANOVA, we pool the variances.  This requires equal variances from each group:  Similar Spread Condition.
+
+
+
+---
+class: left, font140
+# One Minute Paper
+
+Complete the one minute paper: 
+`r one_minute_paper`
+
+1. What was the most important thing you learned during this class?
+2. What important question remains unanswered for you?
+

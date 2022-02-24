@@ -4,6 +4,10 @@ library("wordcloud")
 library("RColorBrewer")
 
 ompWordCloud <- function(text) {
+	if(length(text) < 1) {
+		warning('No text to create a word cloud.')
+		return()
+	}
 	docs <- Corpus(VectorSource(text))
 	# Convert the text to lower case
 	docs <- tm_map(docs, content_transformer(tolower))

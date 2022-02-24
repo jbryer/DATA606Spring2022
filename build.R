@@ -78,7 +78,7 @@ for(i in 1:nrow(meetups)) {
 		
 		cat('---', '\n',
 			'title: "', meetups[i,]$Topic, '"\n',
-			'author: "Jason Bryer"', '\n',
+			'author: "Jason Bryer and Angela Lui"', '\n',
 			'date: ', pubdate, '\n',
 			'draft: false', '\n',
 			'categories: ["Meetups"]', '\n',

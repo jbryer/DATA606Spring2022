@@ -1,6 +1,6 @@
 ---
 title: "Summarizing Data"
-author: "Jason Bryer"
+author: "Jason Bryer and Angela Lui"
 date: 2022-02-09
 draft: false
 categories: ["Meetups"]
