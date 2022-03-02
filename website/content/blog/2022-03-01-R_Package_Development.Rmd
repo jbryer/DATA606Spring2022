@@ -1,0 +1,24 @@
+---
+title: "R Package Development"
+author: "Jason Bryer and Angela Lui"
+date: 2022-03-01
+draft: false
+categories: ["Meetups"]
+tags: ["Annoucement"]
+---
+
+
+[Click here](/slides/2022-03-01-R_Package_Development.html#1) to open the slides ([PDF](/slides/2022-03-01-R_Package_Development.pdf)).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vlyVKGSVCsk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!--more-->
+
+[Click here](/slides/2022-03-01-R_Package_Development.html#1) to open the slides ([PDF](/slides/2022-03-01-R_Package_Development.pdf)).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vlyVKGSVCsk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+R script located here: https://github.com/jbryer/DATA606Spring2022/blob/main/Slides/2022-03-01-R_Package_Development/Build_R_Package.R
+
+You can download the supporting materials here: https://github.com/jbryer/DATA606Spring2022/blob/main/Slides/2022-03-01-R_Package_Development/
+
