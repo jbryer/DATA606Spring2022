@@ -30,10 +30,9 @@ source('config.R')
 ```
 
 
----
 # Data Project Proposal
 
-Due October 31<sup>st</sup>ish Select a dataset that interests you. For the proposal, you need to answer the questions below.
+Due April 3<sup>rd</sup>ish Select a dataset that interests you. For the proposal, you need to answer the questions below.
 
 .font80[
 * Research question
@@ -47,7 +46,7 @@ Due October 31<sup>st</sup>ish Select a dataset that interests you. For the prop
 * Relevant summary statistics
 ]
 
-More information including template and suggested datasets located here: https://fall2021.data606.net/assignments/project/
+More information including template and suggested datasets located here: https://spring2022.data606.net/assignments/project/
 
 ---
 # One Minute Paper Results
@@ -132,8 +131,8 @@ $H_A$: The mean of `samp2` $\ne$ 0.5
 Using confidence intervals, if the *null* value is within the confidence interval, then we *fail* to reject the *null* hypothesis.
 
 ```{r}
-(samp2.ci <- c(mean(samp2) - 2 * sd(samp2) / sqrt(length(samp2)),
-			   mean(samp2) + 2 * sd(samp2) / sqrt(length(samp2))))
+(samp2.ci <- c(mean(samp2) - 1.96 * sd(samp2) / sqrt(length(samp2)),
+			   mean(samp2) + 1.96 * sd(samp2) / sqrt(length(samp2))))
 ```
 
 Since 0.5 fall within `r samp2.ci`, we *fail* to reject the null hypothesis.
@@ -293,6 +292,8 @@ Kelly M. [*Emily Dickinson and monkeys on the stair Or: What is the significance
 ---
 # Statistical vs. Practical Significance
 
+<img src='images/p_values_2x.png' alt='XKCD p-values' align='right' height='500' />
+
 * Real differences between the point estimate and null value are easier to detect with larger samples.
 
 * However, very large samples will result in statistical significance even for tiny differences between the sample mean and the null value (effect size), even when the difference is not practically significant.
@@ -300,6 +301,7 @@ Kelly M. [*Emily Dickinson and monkeys on the stair Or: What is the significance
 * This is especially important to research: if we conduct a study, we want to focus on finding meaningful results (we want observed differences to be real, but also large enough to matter).
 
 * The role of a statistician is not just in the analysis of data, but also in planning and design of a study.
+
 
 ---
 class: center, middle, inverse

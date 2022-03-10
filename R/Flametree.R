@@ -2,16 +2,17 @@ library(flametree)
 library(ggforce)
 library(paletteer)
 
-devtools::install_github("riatelab/cartography")
+# devtools::install_github("riatelab/cartography")
 library(cartography)
 
-dat <- flametree_grow(seed = 2112,
+dat <- flametree_grow(seed = 2113,
 					  time = 11,
 					  split = 2,
-					  angle = c(-10, 10, 20, -20),
-					  prune = 0.1)
-img <- flametree_plot(tree = dat,
-					  palette = 'grDevices::Geyser',
+					  angle = c(-10, 10, 20, -20)
+					  # , prune = 0.1
+					  )
+img <- flametree_plot( dat,
+					  # palette = 'grDevices::Geyser',
 					  background = 'white'
 					  )
 plot(img)
@@ -39,7 +40,7 @@ my_flametree_plot <- function (tree, background = "antiquewhite4", palette = "vi
 	return(picture)
 }
 
-img <- flametree_plot(dat, background = 'white', palette = "pals::ocean.deep")
+img <- flametree_plot(dat, background = 'white'), palette = "pals::ocean.deep")
 plot(img)
 
 paletteer::scale_color_paletteer_c('viridis::inferno')
