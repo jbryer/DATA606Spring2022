@@ -53,6 +53,17 @@ ompWordCloud(omp$`What important question remains unanswered for you?`)
 
 
 ---
+# Announcements
+
+The mid-term exam has been posted to Blackboard.
+
+* It is due March 22nd by midnight.
+* 20 multiple choice questions.
+* May use your book and notes. Do not consult with other students.
+* Good luck!
+
+
+---
 # Example
 
 Two scientists want to know if a certain drug is effective against high blood pressure. The first scientist wants to give the drug to 1,000 people with high blood pressure and see how many of them experience lower blood pressure levels. The second scientist wants to give the drug to 500 people with high blood pressure, and not give the drug to another 500 people with high blood pressure, and see how many in both groups experience lower blood pressure levels. Which is the better way to test this drug?
@@ -343,7 +354,9 @@ p-value = $P(\chi^2_{df = 5} > 24.67)$ is less than 0.001
 
 .font140[
 * The 1-6 axis is consistently shorter than the other two (2-5 and 3-4), thereby supporting the hypothesis that the faces with one and six pips are larger than the other faces.
+
 * Pearson's claim that 5s and 6s appear more often due to the carved-out pips is not supported by these data.
+
 * Dice used in casinos have flush faces, where the pips are filled in with a plastic of the same density as the surrounding material and are precisely balanced.
 ]
 
