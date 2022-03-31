@@ -30,47 +30,13 @@ class: center, middle, inverse, title-slide
 
 .pull-left[
 **What was the most important thing you learned during this class?**
-
-```
-## NULL
-```
+&lt;img src="08-Linear_Regression_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 **What important question remains unanswered for you?**
-
-```
-## NULL
-```
+&lt;img src="08-Linear_Regression_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
----
-# Graphical Analysis of Variance
-
-.pull-left[
-
-```r
-remotes::install_github('jbryer/DATA606')
-library(DATA606)
-shiny_demo('anova')
-```
-
-
-See also [Pruzek &amp; Helmreich (2010). Elemental Graphics for Analysis of Variance using the R Package granova](http://moderngraphics11.pbworks.com/f/ElementalGraphics4ANOVA.RP+JH.pdf).
-]
-
-.pull-right[
-&lt;img src="08-Linear_Regression_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
-
----
-class: font140
-# Homework Presentations
-
-* 7.21	Krutika Patel
-
-* 8.26	Charles Ugiagbe
 
 ---
 # SAT Scores
@@ -385,6 +351,11 @@ head(sat, n=4)
 Plot our regression line with lines representing the residuals. The line of best fit minimizes the residuals.
 
 &lt;img src="08-Linear_Regression_files/figure-html/scatterwithresiduals-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Scatter Plot with Residuals
+
+&lt;img src="08-Linear_Regression_files/figure-html/scatterplotwithresidualscquares-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # Minimizing Sum of Squared Residuals
@@ -762,8 +733,8 @@ sat.outlier
 ```
 
 ```
-##     Verbal Math Sex  Verbal.z   Math.z Math.predicted residual predicted.bad
-## 162    490  800   F -1.068091 1.914735       540.3408 259.6592      716.9152
+##     Verbal Math Sex  Verbal.z   Math.z Math.predicted residual Math.predicted.z residual.z predicted.bad
+## 162    490  800   F -1.068091 1.914735       540.3408 259.6592       -0.7210412   2.635776      716.9152
 ```
 &lt;img src="08-Linear_Regression_files/figure-html/scatteroutlier-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -951,7 +922,7 @@ sat.outlier &lt;- rbind(sat[,c('Verbal','Math')], c(Verbal=outX, Math=outY))
 ---
 
 
-&lt;img src="08-Linear_Regression_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="08-Linear_Regression_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # `\(R^2\)`

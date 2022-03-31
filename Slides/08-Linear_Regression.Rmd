@@ -51,141 +51,6 @@ ompWordCloud(omp$`What important question remains unanswered for you?`)
 ```
 ]
 
----
-# Graphical Analysis of Variance
-
-.pull-left[
-```{r, eval=FALSE}
-remotes::install_github('jbryer/DATA606')
-library(DATA606)
-shiny_demo('anova')
-```
-
-
-See also [Pruzek & Helmreich (2010). Elemental Graphics for Analysis of Variance using the R Package granova](http://moderngraphics11.pbworks.com/f/ElementalGraphics4ANOVA.RP+JH.pdf).
-]
-
-.pull-right[
-```{r, echo=FALSE, results='hide', fig.height=11}
-library(psych)
-library(ggplot2)
-library(tidyverse)
-
-hand <- read.csv('../course_data/Hand_washing.csv', stringsAsFactors = FALSE)
-
-desc <- describeBy(hand$Bacterial.Counts, group = hand$Method, mat = TRUE, skew = FALSE)
-names(desc)[2] <- 'Group'
-desc$Var <- desc$sd^2
-desc$contrast <- (desc$mean - mean(desc$mean))
-mean(desc$contrast) # Should be 0!
-desc
-
-df <- merge(hand, desc[,c('Group', 'contrast', 'mean')],
-			by.x = 'Method', by.y = 'Group', all.x = TRUE)
-
-( k <- length(unique(df$Method)) )
-( n <- nrow(df) )
-
-( grand_mean <- mean(df$Bacterial.Counts) )
-( grand_var <- var(df$Bacterial.Counts) )
-( pooled_var <- mean(desc$Var) )
-
-( ss_total <- sum((df$Bacterial.Counts - grand_mean)^2) )
-( df_between <- k - 1 )
-( ss_between <- sum(desc$n * (desc$mean - grand_mean)^2) )
-( MS_between <- ss_between / df_between )
- 
-( df_within <- n - k )
-( ss_within <- ss_total - ss_between )
-( MS_within <- ss_within / df_within )
-
-( F_stat <- MS_between / MS_within )
-
-( p <- 1 - pf(F_stat, df_between, df_within) )
-
-df_rect <- data.frame(
-	group = c('Between', 'Within'),
-	xmin = c(-1* sqrt(MS_between) / sd(df$Bacterial.Counts),
-			 -1 *sqrt(MS_within) / sd(df$Bacterial.Counts)),
-	xmax = c(    sqrt(MS_between) / sd(df$Bacterial.Counts),
-				 sqrt(MS_within) / sd(df$Bacterial.Counts)),
-	ymin = c(grand_mean - 1 * sqrt(MS_between) / sd(df$Bacterial.Counts),
-			 grand_mean - 1 * sqrt(MS_within) / sd(df$Bacterial.Counts)),
-	ymax = c(grand_mean +     sqrt(MS_between) / sd(df$Bacterial.Counts),
-			 grand_mean +     sqrt(MS_within) / sd(df$Bacterial.Counts))
-)
-
-df_rect <- data.frame(
-	`Mean Square` = c('Between', 'Within'),
-	# contrast = NA,
-	# Value = NA,
-	xmin = c(-1* sqrt(MS_between),
-			 -1 *sqrt(MS_within)),
-	xmax = c(    sqrt(MS_between),
-				 sqrt(MS_within)),
-	ymin = c(grand_mean - 1 * sqrt(MS_between),
-			 grand_mean - 1 * sqrt(MS_within)),
-	ymax = c(grand_mean +     sqrt(MS_between),
-			 grand_mean +     sqrt(MS_within)) )
-
-slope <- (desc[1,]$mean - desc[2,]$mean) / (desc[1,]$contrast - desc[2,]$contrast)
-intercept <- desc[1,]$mean - slope * desc[1,]$contrast
-
-df_rect_within <- df %>%
-	mutate(square = (Bacterial.Counts - mean)^2) %>%
-	group_by(Method) %>%
-	summarize(contrast = mean(Bacterial.Counts) - grand_mean,
-			  mean = mean(Bacterial.Counts),
-			  MS = sum(square) / (n() - 1)) %>%
-	mutate(xmin = contrast - sqrt(MS),
-		   xmax = contrast + sqrt(MS),
-		   ymin = mean - sqrt(MS),
-		   ymax = mean + sqrt(MS))
-
-df_subscript <- paste0(df_between, ', ', df_within)
-title <- bquote(F[.(df_subscript)] == .(prettyNum(F_stat, digits = 3)) ~ '; p' ~ .(ifelse(p < 0.01, ' < 0.01', paste0(' = ', prettyNum(p, digits = 3)))))
-
-ggplot() +
-	geom_rect(data = df_rect_within, aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, color = Method),
-			  alpha = 0.05, linetype = 2) +
-	geom_rect(data = df_rect[1,], aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, group = Mean.Square),
-			  alpha = 0.1, fill = '#7fc97f') +
-	geom_rect(data = df_rect[2,], aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, group = Mean.Square),
-			  alpha = 0.4, fill = '#fdc086') +
-	geom_hline(yintercept = c(grand_mean - sd(df$Bacterial.Counts), grand_mean + sd(df$Bacterial.Counts)),
-			   linetype = 5, color = 'maroon', alpha = 0.5) +
-	geom_text(x = c(-100, 100),
-			  y = c(grand_mean - sd(df$Bacterial.Counts), grand_mean + sd(df$Bacterial.Counts)),
-			  label = c('mean - SD', 'mean + SD'),
-			  color = 'maroon') +
-	geom_hline(yintercept = mean(df$Bacterial.Counts), alpha = 0.5, linetype = 2, size = 1) +
-	geom_abline(slope = slope, intercept = intercept, color = 'grey70') +
-	geom_segment(data = desc, aes(x = contrast, xend = contrast, y = mean - sd, yend = mean + sd), alpha = 0.6) +
-	geom_point(data = df, aes(x = contrast, y = Bacterial.Counts, group = Method, color = Method),
-			   alpha = 0.75, shape = 1, size = 2) +
-	geom_point(aes(x = 0, y = grand_mean), color = 'blue', size = 4) +
-	geom_point(data = desc, aes(x = contrast, y = mean, color = Group), size = 3) +
-	geom_text(data = desc, aes(label = Group, x = contrast, y = min(df$Bacterial.Counts)),
-			  angle = 90, hjust = 0, vjust = -0.8) +
-	ggtitle(title) +
-	scale_color_brewer('Method', type = 'qual', palette = 2) + #scale_fill_brewer('Method', type = 'qual', palette = palette) +
-	xlab('Contrast Coefficient') + ylab('Dependent Variable') + coord_equal() +
-	theme_minimal() + theme(panel.grid.major = element_line(color = 'grey90', size = 0.3),
-							panel.grid.minor = element_blank(),
-							legend.position = 'bottom')
-p
-```
-
-]
-
-
----
-class: font140
-# Homework Presentations
-
-* 7.21	Krutika Patel
-
-* 8.26	Charles Ugiagbe
 
 ---
 # SAT Scores
@@ -384,6 +249,7 @@ To examine the residuals, we first need to calculate the predicted values of y (
 
 ```{r predicted}
 sat$Math.predicted <- m * sat$Verbal + b
+sat$Math.predicted.z <- m * sat$Verbal.z + 0
 head(sat, n=4)
 ```
 
@@ -394,6 +260,7 @@ The residuals are simply the difference between the observed and predicted value
 
 ```{r residuals}
 sat$residual <- sat$Math - sat$Math.predicted
+sat$residual.z <- sat$Math.z - sat$Math.predicted.z
 head(sat, n=4)
 ```
 
@@ -407,6 +274,33 @@ ggplot(sat, aes(x=Verbal, y=Math)) + geom_point(color='black') +
 	geom_abline(intercept=b, slope=m, color='red', size=2, alpha=.5) +
 	geom_segment(aes(xend=Verbal, yend=Math.predicted, color=abs(residual))) +
 	scale_color_gradient(low='white', high='blue')
+```
+
+---
+# Scatter Plot with Residuals
+
+Using the z-scores ensures that a 1-unit change in the *x*-axis is the same as a 1-unit change in the *y*-axis. This makes it easiert to plot the residuals as squares.
+
+```{r scatterplotwithresidualscquares, tidy=FALSE, echo=FALSE, eval=TRUE}
+ggplot(sat, aes(x = Verbal.z, y = Math.z)) +
+	geom_rect(data = sat[sat$residual > 0,],
+			  aes(xmin = Verbal.z - abs(residual.z),
+			  	  xmax = Verbal.z,
+			  	  ymin = Math.predicted.z,
+			  	  ymax = Math.z,
+			  	fill = abs(residual)),
+			  color = 'blue', alpha = 0.1) +
+	geom_rect(data = sat[sat$residual < 0,],
+			  aes(xmin = Verbal.z,
+			  	  xmax = Verbal.z + abs(residual.z),
+			  	  ymin = Math.z,
+			  	  ymax = Math.predicted.z,
+			  	fill = abs(residual)),
+			  color = 'aquamarine4', alpha = 0.1) +
+	geom_point(color='black') +
+	geom_abline(intercept = 0, slope = m, color = 'red', size = 2, alpha = .5) +
+	scale_fill_gradient(low = 'white', high = 'black') +
+	coord_equal()
 ```
 
 ---
