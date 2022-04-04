@@ -22,17 +22,17 @@ The proposal can be more informal using bullet points where necessary and includ
 * Explanatory: What is the explanatory variable(s), and what type is it (numerical/categorival)?
 * Relevant summary statistics 
 
-* [Download project proposal template](https://raw.githubusercontent.com/jbryer/DATA606Fall2020/master/Project/DATA606_proposal_template.Rmd)
-* [Download project template](https://raw.githubusercontent.com/jbryer/DATA606Fall2020/master/Project/DATA606_project_template.Rmd)
+* [Download project proposal template](https://raw.githubusercontent.com/jbryer/DATA606Spring2022/master/Project/DATA606_proposal_template.Rmd)
+* [Download project template](https://raw.githubusercontent.com/jbryer/DATA606Spring2022/master/Project/DATA606_project_template.Rmd)
 
-[Example data project proposal](http://htmlpreview.github.io/?https://github.com/jbryer/DATA606Fall2020/blob/master/Project/Example_proposal.html) ([Source Rmarkdown file](https://raw.githubusercontent.com/jbryer/DATA606Fall2020/master/Project/Example_proposal.Rmd))
+[Example data project proposal](http://htmlpreview.github.io/?https://github.com/jbryer/DATA606Spring2022/blob/master/Project/Example_proposal.html) ([Source Rmarkdown file](https://raw.githubusercontent.com/jbryer/DATA606Spring2022/master/Project/Example_proposal.Rmd))
 
 
 ## Final Project
 
 * You are required to attend ONLY ONE of those time slots. You will do your presentation, watch the other presentations, and provide peer feedback (will be shared anonymously afterward).
 
-[Click here to sign-up for a presentation slot](https://docs.google.com/spreadsheets/d/1SyNHe5ZX4wkxO2qUHi8rd56Q3rYve5sPA5mImey4HHs/edit?usp=sharing). Please pick one timeslot. You need to stay for all presentations during that time as there will be a peer feedback form provided. **There is a maximum of 8 slots per time period.**
+[Click here to sign-up for a presentation slot](https://docs.google.com/spreadsheets/d/1QXd7OiNOGJxLa6VrKV0_-Qrjj5x3tKAyCori6DEbRWk/edit?usp=sharing). Please pick one timeslot. You need to stay for all presentations during that time as there will be a peer feedback form provided. **There is a maximum of 8 slots per time period.**
 
 
 #### Checklist / Suggested Outline
