@@ -290,12 +290,12 @@ ggplot(reportCard, aes(x=Pass2012, y=Pass2013)) + geom_point(alpha=0.2) +
 
 .pull-right[
 ```{r, eval=FALSE}
-shiny_demo('loess')
+library('VisualStats')
+library('ShinyDemo')
+shiny_demo('loess', package = 'VisualStats')
 ```
 
-https://r.bryer.org/shiny/Loess/
-
-See this site for more info: http://varianceexplained.org/files/loess.html
+See this site for more info: https://jbryer.github.io/VisualStats/articles/loess.html
 ]
 
 
