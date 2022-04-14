@@ -90,7 +90,7 @@ class: font90
 
 * Proper use of descriptive and/or inferential statistics.
 
-Full rubric available here: https://fall2021.data606.net/assignments/project/
+Full rubric available here: https://spring2022.data606.net/assignments/project/
 
 ---
 # Weight of Books

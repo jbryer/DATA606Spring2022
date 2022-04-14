@@ -31,17 +31,11 @@ class: center, middle, inverse, title-slide
 
 .pull-left[
 **What was the most important thing you learned during this class?**
-
-```
-## NULL
-```
+&lt;img src="09-Multiple_Regression_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 **What important question remains unanswered for you?**
-
-```
-## NULL
-```
+&lt;img src="09-Multiple_Regression_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -82,7 +76,7 @@ class: font90
 
 * Proper use of descriptive and/or inferential statistics.
 
-Full rubric available here: https://fall2021.data606.net/assignments/project/
+Full rubric available here: https://spring2022.data606.net/assignments/project/
 
 ---
 # Weight of Books
@@ -216,7 +210,7 @@ $$ \hat{weight} = 198 + 0.72 volume - 184 coverpb $$
 
 &lt;center&gt;
 &lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Thu Feb 24 13:05:59 2022 --&gt;
+&lt;!-- Wed Apr 13 19:29:40 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Estimate &lt;/th&gt; &lt;th&gt; Std. Error &lt;/th&gt; &lt;th&gt; t value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;|t|) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td align="right"&gt; (Intercept) &lt;/td&gt; &lt;td align="right"&gt; 197.9628 &lt;/td&gt; &lt;td align="right"&gt; 59.1927 &lt;/td&gt; &lt;td align="right"&gt; 3.34 &lt;/td&gt; &lt;td align="right"&gt; 0.0058 &lt;/td&gt; &lt;/tr&gt;
@@ -321,7 +315,7 @@ print(xtable(anova.poverty, digits = 2), type='html')
 ```
 
 &lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Thu Feb 24 13:06:01 2022 --&gt;
+&lt;!-- Wed Apr 13 19:29:41 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Df &lt;/th&gt; &lt;th&gt; Sum Sq &lt;/th&gt; &lt;th&gt; Mean Sq &lt;/th&gt; &lt;th&gt; F value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;F) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td&gt; female_house &lt;/td&gt; &lt;td align="right"&gt; 1.00 &lt;/td&gt; &lt;td align="right"&gt; 132.57 &lt;/td&gt; &lt;td align="right"&gt; 132.57 &lt;/td&gt; &lt;td align="right"&gt; 18.68 &lt;/td&gt; &lt;td align="right"&gt; 0.00 &lt;/td&gt; &lt;/tr&gt;
@@ -358,7 +352,7 @@ print(xtable(lm.poverty2), type='html')
 ```
 
 &lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Thu Feb 24 13:06:01 2022 --&gt;
+&lt;!-- Wed Apr 13 19:29:41 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Estimate &lt;/th&gt; &lt;th&gt; Std. Error &lt;/th&gt; &lt;th&gt; t value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;|t|) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td align="right"&gt; (Intercept) &lt;/td&gt; &lt;td align="right"&gt; -2.5789 &lt;/td&gt; &lt;td align="right"&gt; 5.7849 &lt;/td&gt; &lt;td align="right"&gt; -0.45 &lt;/td&gt; &lt;td align="right"&gt; 0.6577 &lt;/td&gt; &lt;/tr&gt;
@@ -374,7 +368,7 @@ print(xtable(anova.poverty2, digits = 3), type='html')
 ```
 
 &lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Thu Feb 24 13:06:01 2022 --&gt;
+&lt;!-- Wed Apr 13 19:29:41 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Df &lt;/th&gt; &lt;th&gt; Sum Sq &lt;/th&gt; &lt;th&gt; Mean Sq &lt;/th&gt; &lt;th&gt; F value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;F) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td&gt; female_house &lt;/td&gt; &lt;td align="right"&gt; 1.000 &lt;/td&gt; &lt;td align="right"&gt; 132.568 &lt;/td&gt; &lt;td align="right"&gt; 132.568 &lt;/td&gt; &lt;td align="right"&gt; 18.745 &lt;/td&gt; &lt;td align="right"&gt; 0.000 &lt;/td&gt; &lt;/tr&gt;
@@ -400,7 +394,7 @@ $$ R^2 = \frac{explained \quad variability \quad in \quad y}{total \quad variabi
 poverty vs % female head of household
 
 &lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Thu Feb 24 13:06:02 2022 --&gt;
+&lt;!-- Wed Apr 13 19:29:42 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Estimate &lt;/th&gt; &lt;th&gt; Std. Error &lt;/th&gt; &lt;th&gt; t value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;|t|) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td align="right"&gt; (Intercept) &lt;/td&gt; &lt;td align="right"&gt; 3.3094 &lt;/td&gt; &lt;td align="right"&gt; 1.8970 &lt;/td&gt; &lt;td align="right"&gt; 1.74 &lt;/td&gt; &lt;td align="right"&gt; 0.0873 &lt;/td&gt; &lt;/tr&gt;
@@ -410,7 +404,7 @@ poverty vs % female head of household
 poverty vs % female head of household and % female household
 
 &lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Thu Feb 24 13:06:02 2022 --&gt;
+&lt;!-- Wed Apr 13 19:29:42 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Estimate &lt;/th&gt; &lt;th&gt; Std. Error &lt;/th&gt; &lt;th&gt; t value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;|t|) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td align="right"&gt; (Intercept) &lt;/td&gt; &lt;td align="right"&gt; -2.5789 &lt;/td&gt; &lt;td align="right"&gt; 5.7849 &lt;/td&gt; &lt;td align="right"&gt; -0.45 &lt;/td&gt; &lt;td align="right"&gt; 0.6577 &lt;/td&gt; &lt;/tr&gt;
