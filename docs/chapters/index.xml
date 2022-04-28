@@ -6,7 +6,11 @@
     <description>Recent content in Chapters on DATA 606 - Statistics &amp; Probability - Spring 2022</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Apr 2017 18:36:24 +0200</lastBuildDate><atom:link href="/chapters/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Apr 2017 18:36:24 +0200</lastBuildDate>
+    
+	<atom:link href="/chapters/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Chapter 1</title>
       <link>/chapters/chapter1/</link>
@@ -94,7 +98,7 @@
       <pubDate>Sat, 29 Apr 2017 18:36:24 +0200</pubDate>
       
       <guid>/chapters/bayesian/</guid>
-      <description>Bayesian Analysis Supplemental Readings  Chapter 17 of Learning Statistics with R (Navarro, version 0.6) Fitting a Model by Maximum Likelihood (Collier, 2013). Kruschke&amp;rsquo;s website for Doing Bayesian Data Analysis Kruschke&amp;rsquo;s blog Andrew Gelman&amp;rsquo;s blog - Posts about bayesian statistics  Videos Rasmus Bååth&amp;rsquo;s Introduction to Bayesian Data Analysis Video Series    John Kruschke&amp;rsquo;s Video Series Bayesian Methods Interpret Data Better
+      <description>Bayesian Analysis Supplemental Readings  Chapter 17 of Learning Statistics with R (Navarro, version 0.6) Fitting a Model by Maximum Likelihood (Collier, 2013). Kruschke&#39;s website for Doing Bayesian Data Analysis Kruschke&#39;s blog Andrew Gelman&#39;s blog - Posts about bayesian statistics  Videos Rasmus Bååth&#39;s Introduction to Bayesian Data Analysis Video Series    John Kruschke&#39;s Video Series Bayesian Methods Interpret Data Better
  Bayesian Estimation Supersedes the t Test</description>
     </item>
     

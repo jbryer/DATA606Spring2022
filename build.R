@@ -1,12 +1,20 @@
+hugo_version <- '0.60.0'
+
+# Installation commands
 # usethis::gh_token_help()
 # remotes::install_github("jhelvy/xaringanBuilder")
+# remotes::install_github('rstudio/chromote')
+# install.packages('pdftools') 
+# Need to install with Homebrew: 
+# brew install poppler
+# brew install libxrender
 # credentials::set_github_pat()
+# blogdown::install_hugo(hugo_version, arch = '64bit')
 
 # Builds the course website.
 
 library(xaringanBuilder)
 library(readxl)
-
 
 # Copy the Slides and supplemental materials to the docs/folder
 tocopy <- c(list.files('Slides', pattern = '.html'),
@@ -95,5 +103,6 @@ for(i in 1:nrow(meetups)) {
 
 # Build the site with blogdown
 wd <- setwd('website')
+options(blogdown.hugo.version = hugo_version)
 blogdown::build_site(build_rmd = TRUE)
 setwd(wd)

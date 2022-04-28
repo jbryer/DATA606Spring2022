@@ -81,3 +81,5 @@ You are not to use data sources used in class or the textbooks. Possible data so
 * General Social Survey (GSS) [http://www3.norc.org/GSS+Website/](http://www3.norc.org/GSS+Website/)
 * Integrated Postsecondary Education Data System (IPEDS) [https://nces.ed.gov/ipeds/](https://nces.ed.gov/ipeds/)
 * U.S. Census and American Community Survey [https://cran.r-project.org/web/packages/acs/index.html](https://cran.r-project.org/web/packages/acs/index.html)
+* [10 Standard Datasets for Practicing Applied Machine Learning](https://machinelearningmastery.com/standard-machine-learning-datasets/)
+

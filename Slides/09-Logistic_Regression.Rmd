@@ -7,6 +7,7 @@ output:
   xaringan::moon_reader:
     css: ["assets/mtheme_max.css", "assets/fonts_mtheme_max.css"]
     lib_dir: libs
+    seal: false
     nature:
       highlightStyle: solarized-light
       highlightLanguage: R
@@ -35,9 +36,18 @@ library(DT)
 source('../R/roc.R')
 library(titanic)
 data("titanic")
-
+library(VisualStats)
+# library(VisualMLE)
 ```
 
+class: center, middle, inverse, title-slide
+
+# `r metadata$title`
+## `r metadata$subtitle`
+### `r metadata$author`
+### `r metadata$date`
+
+---
 
 # One Minute Paper Results
 
@@ -474,9 +484,9 @@ lm.out$coefficients
 class: font80
 # The steps of MLE
 
-This figure shows the estimated regression line for each iteration of the optimization procedure (on the left; OLS regression line in blue; MLE regression line in black) with the estimated parameters and log-likelihood for all iterations on the left.
+This figure shows the estimated regression line for each iteration of the optimization procedure (on the left; OLS regression line in blue; MLE regression line in black) with the estimated parameters and log-likelihood for all iterations on the left. This Shiny app will allow you to explore this process interactively: `shiny_demo('mle')`
 
-```{r optim_animation, echo = FALSE, cache = TRUE}
+```{r optim_animation, echo = FALSE, cache = TRUE, fig.height=6}
 df <- optim.ll$iterations_df
 names(df) <- c('Intercept', 'Slope', 'Sigma', 'LogLikelihood', 'Iteration')
 p1 <- ggplot(mtcars, aes(x = wt, y = mpg)) +
@@ -512,7 +522,7 @@ class: code80
 
 
 ```{r, echo = TRUE, fig.height = 6}
-visualMLE::plot_likelihood(x = mtcars$wt, y = mtcars$mpg, pt = 2,
+VisualStats::plot_likelihood(x = mtcars$wt, y = mtcars$mpg, pt = 2,
 						   intercept = optim.ll$par[1],
 						   slope = optim.ll$par[2],
 						   sigma = optim.ll$par[3])
@@ -567,28 +577,51 @@ class: middle, center, inverse
 # Logistic Regression
 
 ---
-# Dichotomous (x) and continuous (y) variables
+# Example: Hours Studying Predicting Passing
 
 ```{r}
-df <- data.frame(
-	x = rep(c(0, 1), each = 10),
-	y = c(rnorm(10, mean = 1, sd = 1),
-		  rnorm(10, mean = 2.5, sd = 1.5))
+study <- data.frame(
+	Hours=c(0.50,0.75,1.00,1.25,1.50,1.75,1.75,2.00,2.25,2.50,2.75,3.00,
+			3.25,3.50,4.00,4.25,4.50,4.75,5.00,5.50),
+	Pass=c(0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1)
 )
-head(df)
-tab <- describeBy(df$y, group = df$x, mat = TRUE, skew = FALSE)
+study[sample(nrow(study), 5),]
+tab <- describeBy(study$Hours, group = study$Pass, mat = TRUE, skew = FALSE)
 tab$group1 <- as.integer(as.character(tab$group1))
 ```
+
 
 ---
 # Dichotomous (x) and continuous (y) variables
 
-
 ```{r, fig.height = 5}
-ggplot(df, aes(x = x, y = y)) +	geom_point(alpha = 0.5) +
+ggplot(study, aes(x = Pass, y = Hours)) + geom_point(alpha = 0.5) +
 	geom_point(data = tab, aes(x = group1, y = mean), color = 'red', size = 4) + 
-	geom_smooth(method = lm, se = FALSE, formula = y ~ x)
+	geom_smooth(method = lm, se = FALSE, formula = y ~ x) + coord_flip()
 ```
+
+
+---
+# Ordinary Least Squares
+
+.pull-left[
+
+```{r}
+lm.out <- lm(Pass ~ Hours, data = study)
+summary(lm.out)
+```
+
+]
+
+.pull-right[
+
+```{r}
+study$linear_resid <- resid(lm.out)
+ggplot(study, aes(x = Hours, y = linear_resid)) +
+	geom_point() +
+	ggtitle('Residual Plot')
+```
+]
 
 ---
 # Regression so far...
@@ -673,19 +706,6 @@ $$F\left( x \right) = \frac {1}{1+{e}^{-\left({\beta}_{0}+\beta_{1}x \right)}}$$
 
 Similar to OLS, we wish to minimize the errors. However, instead of minimizing the least squared residuals, we will use a maximum likelihood function.
 
----
-# Example: Hours Studying Predicting Passing
-
-```{r}
-study <- data.frame(
-	Hours=c(0.50,0.75,1.00,1.25,1.50,1.75,1.75,2.00,2.25,2.50,2.75,3.00,
-			3.25,3.50,4.00,4.25,4.50,4.75,5.00,5.50),
-	Pass=c(0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1)
-)
-```
-```{r, fig.height = 4, fig.widht = 5}
-ggplot(study, aes(x=factor(Pass), y=Hours)) + geom_boxplot() + xlab('Pass') + ylab('Hours Studied')
-```
 
 ---
 # Loglikelihood Function
@@ -725,7 +745,7 @@ optim.binomial$par
 ---
 # How did the optimizer get to this result?
 
-```{r, echo=FALSE, cache=FALSE}
+```{r, echo=FALSE, cache=TRUE}
 logistic <- function(x, b0, b1) {
 	return(1 / (1 + exp(-1 * (b0 + b1 * x)) ))
 }
@@ -812,9 +832,63 @@ ggplot(study, aes(x=Hours, y=Pass)) +
 ```
 
 ---
+# But why log likelihood?
+
+
+Since we know our outcomes are either zero or one, and hence bounded by zero and one, then we are only considering values of log(x) between zero and one. The plot below shows that log(x) for all 0 ≤ 1𝑥≤ 1 is negative, going asymptotically to −∞ as x approaches zero.
+
+```{r, fig.height=5}
+ggplot() + geom_function(fun = log) + xlim(0, 1)
+```
+
+Since $log(1) = 0$, we want to reverse the likelihood, that is, we will take the $log(1 - likelihood)$ so that smaller errors result in larger log-likelihood values.
+
+---
+# But why log likelihood?
+
+```{r, echo=FALSE}
+study$likelihood <- logit(study$Hours,                                 
+                          beta0 = optim.binomial$par[1], 
+                          beta1 = optim.binomial$par[2])
+study$log_likelihood <- study$Pass * log(study$likelihood) +         # If Pass == 1
+                        (1 - study$Pass) * log(1 - study$likelihood) # If Pass == 0
+ggplot(data = study, aes(x = Hours, y = Pass)) + 
+    geom_smooth(method = 'glm', formula = y ~ x,
+                method.args = list(family=binomial(link='logit')), se = FALSE, alpha = 0.2) +
+    geom_hline(yintercept = 0) +
+    geom_function(fun = logit, color = 'grey50', size = 1,
+                  args = list(beta0 = optim.binomial$par[1], beta1 = optim.binomial$par[2])) +
+    geom_segment(aes(xend = Hours, y = 1 - Pass, yend = likelihood, color = factor(Pass)), alpha = 0.5) +
+    geom_point(aes(y = likelihood, color = factor(Pass), shape = 'Predicted'), size = 3) +
+    geom_point(aes(color = factor(Pass), shape = 'Observed'), size = 3) +
+    geom_point(aes(y = log_likelihood, color = factor(Pass), shape = 'Log Likelihood'), size = 3) +
+    scale_color_brewer('Pass', type = 'qual', palette = 6)
+```
+
+
+---
+# Assumptions
+
+.pull-left[
+Although maximizing the log-likelihood provides a result similar to minimizing the sum of squared residuals using the logistic function, the log-likelihood doesn’t rely on the assumptions of residuals OLS does. Namely:
+
+* There is no assumption of linearity between the dependent and independent variables.
+* Homoscedasticity (constant variance) is not for logistic regression (but is for linear regression).
+* The residuals do not have to be normally distributed.
+
+There is an assumption of linearity between the independent variable(s) and the log-odds.
+]
+
+.pull-right[
+```{r}
+lr.out <- glm(Pass ~ Hours, data = study, 
+			  family = binomial(link='logit'))
+plot_linear_assumption_check(lr.out, n_groups = 5)
+```
+]
+---
 class: inverse, middle, center
 # Predictive Modeling
-
 
 ---
 # Prediction
@@ -1012,6 +1086,13 @@ plot(psranges2)
 
 ---
 # Additional Resources
+
+
+* [The Path to Log Likelihood](https://jbryer.github.io/VisualStats/articles/log_likelihood.html)
+
+* [Visual Introduction to Maximum Likelihood Estimation](https://jbryer.github.io/VisualStats/articles/mle.html)
+
+* [VisualStats R Package](https://jbryer.github.io/VisualStats/index.html)
 
 * [Logistic Regression Details Pt 2: Maximum Likelihood](https://www.youtube.com/watch?v=BfKanl1aSG0)
 

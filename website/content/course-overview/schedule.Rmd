@@ -115,7 +115,7 @@ if(Sys.Date() < start_day) {
       selectMirror: true,
       nowIndicator: true,
       events: [
- ```{r, echo=FALSE, results = 'asis', warning=FALSE, message=FALSE, error=FALSE}
+```{r, echo=FALSE, results = 'asis', warning=FALSE, message=FALSE, error=FALSE}
 cat(paste0(c(
 	paste0('{ title: "', topics$Topic, '",\n', 
 	       ifelse(is.na(topics$Link), '', paste0('  url: "', topics$Link, '",\n')),

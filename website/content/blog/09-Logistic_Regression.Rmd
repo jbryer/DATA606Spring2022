@@ -1,0 +1,22 @@
+---
+title: "Logistic Regression"
+author: "Jason Bryer and Angela Lui"
+date: 2022-04-27
+draft: false
+categories: ["Meetups"]
+tags: ["Annoucement"]
+---
+
+
+[Click here](/slides/09-Logistic_Regression.html#1) to open the slides ([PDF](/slides/09-Logistic_Regression.pdf)).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fVv-i5swiRY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!--more-->
+
+[Click here](/slides/09-Logistic_Regression.html#1) to open the slides ([PDF](/slides/09-Logistic_Regression.pdf)).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fVv-i5swiRY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+

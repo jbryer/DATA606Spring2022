@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Bayesian - DATA 606 - Statistics &amp; Probability - Spring 2022</title>
-<meta name="generator" content="Hugo 0.78.1" />
+<meta name="generator" content="Hugo 0.60.0" />
 <link href="//index.xml" rel="alternate" type="application/rss+xml">
 <link rel="canonical" href="/chapters/bayesian/">
 <link rel="stylesheet" href="/css/theme.min.css">
@@ -17,7 +17,7 @@
 :root {--custom-background-color: #003366;}
 </style>
 <meta property="og:title" content="Bayesian" />
-<meta property="og:description" content="Bayesian Analysis Supplemental Readings  Chapter 17 of Learning Statistics with R (Navarro, version 0.6) Fitting a Model by Maximum Likelihood (Collier, 2013). Kruschke&rsquo;s website for Doing Bayesian Data Analysis Kruschke&rsquo;s blog Andrew Gelman&rsquo;s blog - Posts about bayesian statistics  Videos Rasmus Bååth&rsquo;s Introduction to Bayesian Data Analysis Video Series    John Kruschke&rsquo;s Video Series Bayesian Methods Interpret Data Better
+<meta property="og:description" content="Bayesian Analysis Supplemental Readings  Chapter 17 of Learning Statistics with R (Navarro, version 0.6) Fitting a Model by Maximum Likelihood (Collier, 2013). Kruschke&#39;s website for Doing Bayesian Data Analysis Kruschke&#39;s blog Andrew Gelman&#39;s blog - Posts about bayesian statistics  Videos Rasmus Bååth&#39;s Introduction to Bayesian Data Analysis Video Series    John Kruschke&#39;s Video Series Bayesian Methods Interpret Data Better
  Bayesian Estimation Supersedes the t Test" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/chapters/bayesian/" />
@@ -28,20 +28,19 @@
 <meta name="twitter:image" content="/images/og-image.png"/>
 
 <meta name="twitter:title" content="Bayesian"/>
-<meta name="twitter:description" content="Bayesian Analysis Supplemental Readings  Chapter 17 of Learning Statistics with R (Navarro, version 0.6) Fitting a Model by Maximum Likelihood (Collier, 2013). Kruschke&rsquo;s website for Doing Bayesian Data Analysis Kruschke&rsquo;s blog Andrew Gelman&rsquo;s blog - Posts about bayesian statistics  Videos Rasmus Bååth&rsquo;s Introduction to Bayesian Data Analysis Video Series    John Kruschke&rsquo;s Video Series Bayesian Methods Interpret Data Better
+<meta name="twitter:description" content="Bayesian Analysis Supplemental Readings  Chapter 17 of Learning Statistics with R (Navarro, version 0.6) Fitting a Model by Maximum Likelihood (Collier, 2013). Kruschke&#39;s website for Doing Bayesian Data Analysis Kruschke&#39;s blog Andrew Gelman&#39;s blog - Posts about bayesian statistics  Videos Rasmus Bååth&#39;s Introduction to Bayesian Data Analysis Video Series    John Kruschke&#39;s Video Series Bayesian Methods Interpret Data Better
  Bayesian Estimation Supersedes the t Test"/>
 <meta itemprop="name" content="Bayesian">
-<meta itemprop="description" content="Bayesian Analysis Supplemental Readings  Chapter 17 of Learning Statistics with R (Navarro, version 0.6) Fitting a Model by Maximum Likelihood (Collier, 2013). Kruschke&rsquo;s website for Doing Bayesian Data Analysis Kruschke&rsquo;s blog Andrew Gelman&rsquo;s blog - Posts about bayesian statistics  Videos Rasmus Bååth&rsquo;s Introduction to Bayesian Data Analysis Video Series    John Kruschke&rsquo;s Video Series Bayesian Methods Interpret Data Better
+<meta itemprop="description" content="Bayesian Analysis Supplemental Readings  Chapter 17 of Learning Statistics with R (Navarro, version 0.6) Fitting a Model by Maximum Likelihood (Collier, 2013). Kruschke&#39;s website for Doing Bayesian Data Analysis Kruschke&#39;s blog Andrew Gelman&#39;s blog - Posts about bayesian statistics  Videos Rasmus Bååth&#39;s Introduction to Bayesian Data Analysis Video Series    John Kruschke&#39;s Video Series Bayesian Methods Interpret Data Better
  Bayesian Estimation Supersedes the t Test">
-<meta itemprop="datePublished" content="2017-04-29T18:36:24+02:00" />
-<meta itemprop="dateModified" content="2017-04-29T18:36:24+02:00" />
+<meta itemprop="datePublished" content="2017-04-29T18:36:24&#43;02:00" />
+<meta itemprop="dateModified" content="2017-04-29T18:36:24&#43;02:00" />
 <meta itemprop="wordCount" content="68">
 <meta itemprop="image" content="/images/og-image.png"/>
 
 
 
-<meta itemprop="keywords" content="" />
-<link href='/fullcalendar-lib/main.css' rel='stylesheet' />
+<meta itemprop="keywords" content="" /><link href='/fullcalendar-lib/main.css' rel='stylesheet' />
 <script src='/fullcalendar-lib/main.js'></script>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -80,16 +79,16 @@
 <ul>
 <li><a href="https://github.com/jbryer/DATA606Fall2020/blob/master/Textbook/lsr-0.6.pdf">Chapter 17 of <em>Learning Statistics with R</em> (Navarro, version 0.6)</a></li>
 <li><a href="https://www.r-bloggers.com/fitting-a-model-by-maximum-likelihood/">Fitting a Model by Maximum Likelihood</a> (Collier, 2013).</li>
-<li><a href="https://sites.google.com/site/doingbayesiandataanalysis/">Kruschke&rsquo;s website for <em>Doing Bayesian Data Analysis</em></a></li>
-<li><a href="http://doingbayesiandataanalysis.blogspot.com/">Kruschke&rsquo;s blog</a></li>
-<li><a href="http://andrewgelman.com/">Andrew Gelman&rsquo;s blog</a> - Posts about <a href="http://andrewgelman.com/category/bayesian-statistics/">bayesian statistics</a></li>
+<li><a href="https://sites.google.com/site/doingbayesiandataanalysis/">Kruschke's website for <em>Doing Bayesian Data Analysis</em></a></li>
+<li><a href="http://doingbayesiandataanalysis.blogspot.com/">Kruschke's blog</a></li>
+<li><a href="http://andrewgelman.com/">Andrew Gelman's blog</a> - Posts about <a href="http://andrewgelman.com/category/bayesian-statistics/">bayesian statistics</a></li>
 </ul>
 <h3 id="videos">Videos</h3>
-<h4 id="rasmus-baringaringths-introduction-to-bayesian-data-analysis-video-series">Rasmus Bååth&rsquo;s Introduction to Bayesian Data Analysis Video Series</h4>
+<h4 id="rasmus-baringaringths-introduction-to-bayesian-data-analysis-video-series">Rasmus Bååth's Introduction to Bayesian Data Analysis Video Series</h4>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3OJEae7Qb_o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mAUwjSo5TJE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Ie-6H_r7I5A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<h4 id="john-kruschkes-video-series">John Kruschke&rsquo;s Video Series</h4>
+<h4 id="john-kruschkes-video-series">John Kruschke's Video Series</h4>
 <p><a href="https://www.youtube.com/watch?v=YyohWpjl6KU">Bayesian Methods Interpret Data Better</a></p>
 <iframe width="420" height="315" src="https://www.youtube.com/embed/YyohWpjl6KU" frameborder="0" allowfullscreen></iframe>
 <p><a href="https://www.youtube.com/watch?v=fhw1j1Ru2i0">Bayesian Estimation Supersedes the t Test</a></p>

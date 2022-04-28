@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Chapter 6 - DATA 606 - Statistics &amp; Probability - Spring 2022</title>
-<meta name="generator" content="Hugo 0.78.1" />
+<meta name="generator" content="Hugo 0.60.0" />
 <link href="//index.xml" rel="alternate" type="application/rss+xml">
 <link rel="canonical" href="/chapters/chapter6/">
 <link rel="stylesheet" href="/css/theme.min.css">
@@ -30,15 +30,14 @@
 <meta name="twitter:description" content="MathJax.Hub.Config({ tex2jax: { inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]], displayMath: [[&#39;$$&#39;,&#39;$$&#39;], [&#39;\[&#39;,&#39;\]&#39;]], processEscapes: true, processEnvironments: true, skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;], TeX: { equationNumbers: { autoNumber: &#34;AMS&#34; }, extensions: [&#34;AMSmath.js&#34;, &#34;AMSsymbols.js&#34;] } } });   Inference for Categorical Data Learning Outcomes  Define population proportion $p$ (parameter) and sample proportion $\hat{p}$ (point estimate). Calculate the sampling variability of the proportion, the standard error, as [ SE = \sqrt{\frac{p(1-p)}{n}}, ] where $p$ is the population proportion."/>
 <meta itemprop="name" content="Chapter 6">
 <meta itemprop="description" content="MathJax.Hub.Config({ tex2jax: { inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]], displayMath: [[&#39;$$&#39;,&#39;$$&#39;], [&#39;\[&#39;,&#39;\]&#39;]], processEscapes: true, processEnvironments: true, skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;], TeX: { equationNumbers: { autoNumber: &#34;AMS&#34; }, extensions: [&#34;AMSmath.js&#34;, &#34;AMSsymbols.js&#34;] } } });   Inference for Categorical Data Learning Outcomes  Define population proportion $p$ (parameter) and sample proportion $\hat{p}$ (point estimate). Calculate the sampling variability of the proportion, the standard error, as [ SE = \sqrt{\frac{p(1-p)}{n}}, ] where $p$ is the population proportion.">
-<meta itemprop="datePublished" content="2017-04-29T18:36:24+02:00" />
-<meta itemprop="dateModified" content="2017-04-29T18:36:24+02:00" />
+<meta itemprop="datePublished" content="2017-04-29T18:36:24&#43;02:00" />
+<meta itemprop="dateModified" content="2017-04-29T18:36:24&#43;02:00" />
 <meta itemprop="wordCount" content="1048">
 <meta itemprop="image" content="/images/og-image.png"/>
 
 
 
-<meta itemprop="keywords" content="" />
-<link href='/fullcalendar-lib/main.css' rel='stylesheet' />
+<meta itemprop="keywords" content="" /><link href='/fullcalendar-lib/main.css' rel='stylesheet' />
 <script src='/fullcalendar-lib/main.js'></script>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -125,7 +124,7 @@ and test statistics are calculated as
 <code>$SE_{\hat{p}} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$</code></li>
 <li>For hypothesis tests use $p_0$ (null value) when calculating the standard error and checking the success/failure condition:
 <code>$SE_{\hat{p}} = \sqrt{\frac{p_0 (1-p_0)}{n}}$</code></li>
-<li>Such a discrepancy doesn&rsquo;t exist when conducting inference for means, since the mean doesn&rsquo;t factor into the calculation of the standard error, while the proportion does.</li>
+<li>Such a discrepancy doesn't exist when conducting inference for means, since the mean doesn't factor into the calculation of the standard error, while the proportion does.</li>
 </ul>
 </li>
 <li>Calculate the required minimum sample size for a given margin of error at a given confidence level, and explain why we use $\hat{p} = 0.5$ if there are no previous studies suggesting a more accurate estimate.
@@ -173,10 +172,10 @@ where $k$ is the number of cells.</li>
 <li>Calculate expected counts in two-way tables as
 [ E = \frac{\text{row total} \times \text{column total}}{\text{grand total}} ]</li>
 <li>Calculate the degrees of freedom for chi-square test of independence as $df = (R - 1) \times (C - 1)$, where $R$ is the number of rows in a two-way table, and $C$ is the number of columns.</li>
-<li>Note that there is no such thing as a chi-square confidence interval for proportions, since in the case of a categorical variables with many levels, there isn&rsquo;t one parameter to estimate.</li>
-<li>Use simulation methods when sample size conditions aren&rsquo;t met for inference for categorical variables.
+<li>Note that there is no such thing as a chi-square confidence interval for proportions, since in the case of a categorical variables with many levels, there isn't one parameter to estimate.</li>
+<li>Use simulation methods when sample size conditions aren't met for inference for categorical variables.
 <ul>
-<li>Note that the $t$-distribution is only appropriate to use for means, when sample size isn&rsquo;t sufficiently large, and the parameter of interest is a proportion or a difference between two proportions, we need to use simulation.</li>
+<li>Note that the $t$-distribution is only appropriate to use for means, when sample size isn't sufficiently large, and the parameter of interest is a proportion or a difference between two proportions, we need to use simulation.</li>
 </ul>
 </li>
 <li>In hypothesis testing

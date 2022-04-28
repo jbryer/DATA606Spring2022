@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Chapter 8 - DATA 606 - Statistics &amp; Probability - Spring 2022</title>
-<meta name="generator" content="Hugo 0.78.1" />
+<meta name="generator" content="Hugo 0.60.0" />
 <link href="//index.xml" rel="alternate" type="application/rss+xml">
 <link rel="canonical" href="/chapters/chapter8/">
 <link rel="stylesheet" href="/css/theme.min.css">
@@ -30,15 +30,14 @@
 <meta name="twitter:description" content="MathJax.Hub.Config({ tex2jax: { inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]], displayMath: [[&#39;$$&#39;,&#39;$$&#39;], [&#39;\[&#39;,&#39;\]&#39;]], processEscapes: true, processEnvironments: true, skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;], TeX: { equationNumbers: { autoNumber: &#34;AMS&#34; }, extensions: [&#34;AMSmath.js&#34;, &#34;AMSsymbols.js&#34;] } } });   Introduction to Linear Regression Learning Outcomes  Define the explanatory variable as the independent variable (predictor), and the response variable as the dependent variable (predicted). Plot the explanatory variable ($x$) on the x-axis and the response variable ($y$) on the y-axis, and fit a linear regression model $y = \beta_0 &#43; \beta_1 x$ where $\beta_0$ is the intercept, and $\beta_1$ is the slope."/>
 <meta itemprop="name" content="Chapter 8">
 <meta itemprop="description" content="MathJax.Hub.Config({ tex2jax: { inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]], displayMath: [[&#39;$$&#39;,&#39;$$&#39;], [&#39;\[&#39;,&#39;\]&#39;]], processEscapes: true, processEnvironments: true, skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;], TeX: { equationNumbers: { autoNumber: &#34;AMS&#34; }, extensions: [&#34;AMSmath.js&#34;, &#34;AMSsymbols.js&#34;] } } });   Introduction to Linear Regression Learning Outcomes  Define the explanatory variable as the independent variable (predictor), and the response variable as the dependent variable (predicted). Plot the explanatory variable ($x$) on the x-axis and the response variable ($y$) on the y-axis, and fit a linear regression model $y = \beta_0 &#43; \beta_1 x$ where $\beta_0$ is the intercept, and $\beta_1$ is the slope.">
-<meta itemprop="datePublished" content="2017-04-29T18:36:24+02:00" />
-<meta itemprop="dateModified" content="2017-04-29T18:36:24+02:00" />
+<meta itemprop="datePublished" content="2017-04-29T18:36:24&#43;02:00" />
+<meta itemprop="dateModified" content="2017-04-29T18:36:24&#43;02:00" />
 <meta itemprop="wordCount" content="1025">
 <meta itemprop="image" content="/images/og-image.png"/>
 
 
 
-<meta itemprop="keywords" content="" />
-<link href='/fullcalendar-lib/main.css' rel='stylesheet' />
+<meta itemprop="keywords" content="" /><link href='/fullcalendar-lib/main.css' rel='stylesheet' />
 <script src='/fullcalendar-lib/main.js'></script>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -114,7 +113,7 @@ where $\beta_0$ is the intercept, and $\beta_1$ is the slope.
 <li>Note that a relationship that is nonlinear is simply called an association.</li>
 </ul>
 </li>
-<li>Note that correlation coefficient ($r$, also called Pearson&rsquo;s $r$) the following properties:
+<li>Note that correlation coefficient ($r$, also called Pearson's $r$) the following properties:
 <ul>
 <li>the magnitude (absolute value) of the correlation coefficient measures the strength of the linear association between two numerical variables</li>
 <li>the sign of the correlation coefficient indicates the direction of association</li>
@@ -190,7 +189,7 @@ with $df = n - 2$.
 <li>Note that the T score has $n - 2$ degrees of freedom since we lose one degree of freedom for each parameter we estimate, and in this case we estimate the intercept and the slope.</li>
 </ul>
 </li>
-<li>Note that a hypothesis test for the intercept is often irrelevant since it&rsquo;s usually out of the range of the data, and hence it is usually an extrapolation.</li>
+<li>Note that a hypothesis test for the intercept is often irrelevant since it's usually out of the range of the data, and hence it is usually an extrapolation.</li>
 <li>Calculate a confidence interval for the slope as
 <code>$b_1 \pm t^\star_{df} SE_{b_1}$</code>
 where $df = n - 2$ and <code>$t^\star_{df}$</code> is the critical score associated with the given confidence level at the desired degrees of freedom.

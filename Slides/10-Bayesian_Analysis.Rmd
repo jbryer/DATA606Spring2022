@@ -65,6 +65,8 @@ Kruschke's videos are an excelent introduction to Bayesian Analysis [https://www
 
 Video series by Rasmus Baath [Part 1](https://www.youtube.com/watch?v=3OJEae7Qb_o&app=desktop), [Part 2](https://www.youtube.com/watch?v=mAUwjSo5TJE), [Part 3](https://www.youtube.com/watch?v=Ie-6H_r7I5A)
 
+[Billiards with Fred the Frequentist and Bayer the Bayesian](https://towardsdatascience.com/billiards-with-fred-the-frequentist-and-bayer-the-bayesian-bayer-wins-7bc95b24a7ef)
+
 ---
 # Bayes Theorem
 

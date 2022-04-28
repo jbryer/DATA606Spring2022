@@ -12,18 +12,18 @@
   </head>
   <body>
     <textarea id="source">
+
+
+
+
 class: center, middle, inverse, title-slide
 
 # Maximum Likelihood Estimation and Logistic Regression
 ## DATA 606 - Statistics &amp; Probability for Data Analytics
-### Jason Bryer, Ph.D. and Angela Lui, Ph.D.
+### Jason Bryer, Ph.D. and Angela Lui, Ph.D.
 ### April 27, 2022
 
 ---
-
-
-
-
 
 # One Minute Paper Results
 
@@ -31,17 +31,11 @@ class: center, middle, inverse, title-slide
 
 .pull-left[
 **What was the most important thing you learned during this class?**
-
-```
-## NULL
-```
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 **What important question remains unanswered for you?**
-
-```
-## NULL
-```
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -302,7 +296,7 @@ optim.rss$par
 ```
 
 ```
-## [1] 37.285113 -5.344468
+## [1] 37.285116 -5.344465
 ```
 
 --
@@ -324,7 +318,7 @@ lm.out$coefficients
 # OLS with the `optim` function
 
 
-It took the `optim` function 65 iterations to find the optimal set of parameters that minimized the RSS. This figure shows the value of the parameters (i.e. intercept and slope) and the RSS for each iteration.
+It took the `optim` function 60 iterations to find the optimal set of parameters that minimized the RSS. This figure shows the value of the parameters (i.e. intercept and slope) and the RSS for each iteration.
 
 &lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -423,7 +417,7 @@ optim.ll$par[1:2]
 ```
 
 ```
-## [1] 37.285127 -5.344472
+## [1] 37.284992 -5.344417
 ```
 
 ```r
@@ -440,7 +434,7 @@ lm.out$coefficients
 class: font80
 # The steps of MLE
 
-This figure shows the estimated regression line for each iteration of the optimization procedure (on the left; OLS regression line in blue; MLE regression line in black) with the estimated parameters and log-likelihood for all iterations on the left.
+This figure shows the estimated regression line for each iteration of the optimization procedure (on the left; OLS regression line in blue; MLE regression line in black) with the estimated parameters and log-likelihood for all iterations on the left. This Shiny app will allow you to explore this process interactively: `shiny_demo('mle')`
 
 &lt;img src="09-Logistic_Regression_files/figure-html/optim_animation-1.gif" style="display: block; margin: auto;" /&gt;
 
@@ -451,7 +445,7 @@ class: code80
 
 
 ```r
-visualMLE::plot_likelihood(x = mtcars$wt, y = mtcars$mpg, pt = 2,
+VisualStats::plot_likelihood(x = mtcars$wt, y = mtcars$mpg, pt = 2,
 						   intercept = optim.ll$par[1],
 						   slope = optim.ll$par[2],
 						   sigma = optim.ll$par[3])
@@ -480,7 +474,7 @@ optim.ll$par[3]
 ```
 
 ```
-## [1] 2.949164
+## [1] 2.949136
 ```
 
 ```r
@@ -496,45 +490,92 @@ class: middle, center, inverse
 # Logistic Regression
 
 ---
-# Dichotomous (x) and continuous (y) variables
+# Example: Hours Studying Predicting Passing
 
 
 ```r
-df &lt;- data.frame(
-	x = rep(c(0, 1), each = 10),
-	y = c(rnorm(10, mean = 1, sd = 1),
-		  rnorm(10, mean = 2.5, sd = 1.5))
+study &lt;- data.frame(
+	Hours=c(0.50,0.75,1.00,1.25,1.50,1.75,1.75,2.00,2.25,2.50,2.75,3.00,
+			3.25,3.50,4.00,4.25,4.50,4.75,5.00,5.50),
+	Pass=c(0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1)
 )
-head(df)
+study[sample(nrow(study), 5),]
 ```
 
 ```
-##   x          y
-## 1 0  1.3573080
-## 2 0  2.8606923
-## 3 0 -0.2019866
-## 4 0  1.3343358
-## 5 0  1.7258741
-## 6 0  0.4548514
+##    Hours Pass
+## 4   1.25    0
+## 6   1.75    0
+## 9   2.25    1
+## 19  5.00    1
+## 20  5.50    1
 ```
 
 ```r
-tab &lt;- describeBy(df$y, group = df$x, mat = TRUE, skew = FALSE)
+tab &lt;- describeBy(study$Hours, group = study$Pass, mat = TRUE, skew = FALSE)
 tab$group1 &lt;- as.integer(as.character(tab$group1))
 ```
+
 
 ---
 # Dichotomous (x) and continuous (y) variables
 
 
-
 ```r
-ggplot(df, aes(x = x, y = y)) +	geom_point(alpha = 0.5) +
+ggplot(study, aes(x = Pass, y = Hours)) + geom_point(alpha = 0.5) +
 	geom_point(data = tab, aes(x = group1, y = mean), color = 'red', size = 4) + 
-	geom_smooth(method = lm, se = FALSE, formula = y ~ x)
+	geom_smooth(method = lm, se = FALSE, formula = y ~ x) + coord_flip()
 ```
 
 &lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Ordinary Least Squares
+
+.pull-left[
+
+
+```r
+lm.out &lt;- lm(Pass ~ Hours, data = study)
+summary(lm.out)
+```
+
+```
+## 
+## Call:
+## lm(formula = Pass ~ Hours, data = study)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.66715 -0.21262 -0.02053  0.17157  0.74339 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.15394    0.18315  -0.840 0.411655    
+## Hours        0.23460    0.05813   4.036 0.000775 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.3819 on 18 degrees of freedom
+## Multiple R-squared:  0.4751,	Adjusted R-squared:  0.4459 
+## F-statistic: 16.29 on 1 and 18 DF,  p-value: 0.0007751
+```
+
+]
+
+.pull-right[
+
+
+```r
+study$linear_resid &lt;- resid(lm.out)
+ggplot(study, aes(x = Hours, y = linear_resid)) +
+	geom_point() +
+	ggtitle('Residual Plot')
+```
+
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 # Regression so far...
@@ -609,7 +650,7 @@ logistic &lt;- function(t) { return(1 / (1 + exp(-t))) }
 ggplot() + stat_function(fun = logistic, n = 101) +  xlim(-4, 4) + xlab('t')
 ```
 
-&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # *t* as a Linear Function
@@ -622,23 +663,6 @@ The logistic function can now be rewritten as
 
 Similar to OLS, we wish to minimize the errors. However, instead of minimizing the least squared residuals, we will use a maximum likelihood function.
 
----
-# Example: Hours Studying Predicting Passing
-
-
-```r
-study &lt;- data.frame(
-	Hours=c(0.50,0.75,1.00,1.25,1.50,1.75,1.75,2.00,2.25,2.50,2.75,3.00,
-			3.25,3.50,4.00,4.25,4.50,4.75,5.00,5.50),
-	Pass=c(0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1)
-)
-```
-
-```r
-ggplot(study, aes(x=factor(Pass), y=Hours)) + geom_boxplot() + xlab('Pass') + ylab('Hours Studied')
-```
-
-&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # Loglikelihood Function
@@ -726,9 +750,52 @@ optim.binomial$par
 &lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
+# But why log likelihood?
+
+
+Since we know our outcomes are either zero or one, and hence bounded by zero and one, then we are only considering values of log(x) between zero and one. The plot below shows that log(x) for all 0 ≤ 1𝑥≤ 1 is negative, going asymptotically to −∞ as x approaches zero.
+
+
+```r
+ggplot() + geom_function(fun = log) + xlim(0, 1)
+```
+
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+
+Since `\(log(1) = 0\)`, we want to reverse the likelihood, that is, we will take the `\(log(1 - likelihood)\)` so that smaller errors result in larger log-likelihood values.
+
+---
+# But why log likelihood?
+
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Assumptions
+
+.pull-left[
+Although maximizing the log-likelihood provides a result similar to minimizing the sum of squared residuals using the logistic function, the log-likelihood doesn’t rely on the assumptions of residuals OLS does. Namely:
+
+* There is no assumption of linearity between the dependent and independent variables.
+* Homoscedasticity (constant variance) is not for logistic regression (but is for linear regression).
+* The residuals do not have to be normally distributed.
+
+There is an assumption of linearity between the independent variable(s) and the log-odds.
+]
+
+.pull-right[
+
+```r
+lr.out &lt;- glm(Pass ~ Hours, data = study, 
+			  family = binomial(link='logit'))
+plot_linear_assumption_check(lr.out, n_groups = 5)
+```
+
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
 class: inverse, middle, center
 # Predictive Modeling
-
 
 ---
 # Prediction
@@ -756,8 +823,10 @@ study[1,]
 ```
 
 ```
-##   Hours Pass    Predict Predict_Pass          p
-## 1   0.5    0 0.03471034        FALSE 0.03471462
+##   Hours Pass linear_resid    Predict Predict_Pass          p likelihood
+## 1   0.5    0   0.03663746 0.03471034        FALSE 0.03471462 0.03471462
+##   log_likelihood
+## 1    -0.03533149
 ```
 
 ```r
@@ -827,7 +896,7 @@ This is the proportions of survivors and defines what our "guessing" rate is. Th
 ```
 ## 
 ##        No       Yes 
-## 0.6135371 0.3864629
+## 0.6146288 0.3853712
 ```
 
 ---
@@ -848,24 +917,24 @@ summary(lr.out)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.1414  -0.7180  -0.4857   0.7142   2.3834  
+## -2.1940  -0.7094  -0.4883   0.6913   2.4298  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)  1.26831    0.15357   8.259   &lt;2e-16 ***
-## pclass.L    -1.27555    0.14574  -8.752   &lt;2e-16 ***
-## pclass.Q     0.03935    0.15941   0.247   0.8050    
-## sexmale     -2.46018    0.17823 -13.803   &lt;2e-16 ***
-## sibsp       -0.22839    0.09702  -2.354   0.0186 *  
-## parch        0.10561    0.10175   1.038   0.2993    
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.375119   0.159035   8.647   &lt;2e-16 ***
+## pclass.L    -1.282344   0.147744  -8.679   &lt;2e-16 ***
+## pclass.Q     0.074784   0.160666   0.465   0.6416    
+## sexmale     -2.565595   0.182504 -14.058   &lt;2e-16 ***
+## sibsp       -0.205706   0.097213  -2.116   0.0343 *  
+## parch       -0.004438   0.095964  -0.046   0.9631    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 1222.20  on 915  degrees of freedom
-## Residual deviance:  885.72  on 910  degrees of freedom
-## AIC: 897.72
+##     Null deviance: 1221.27  on 915  degrees of freedom
+## Residual deviance:  876.15  on 910  degrees of freedom
+## AIC: 888.15
 ## 
 ## Number of Fisher Scoring iterations: 4
 ```
@@ -879,7 +948,7 @@ titanic_train$prediction &lt;- predict(lr.out, type = 'response', newdata = tita
 ggplot(titanic_train, aes(x = prediction, color = survived)) + geom_density()
 ```
 
-&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-48-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # Results
@@ -894,11 +963,11 @@ tab &lt;- table(titanic_train$prediction_class,
 ```
 ##        
 ##                 No        Yes
-##   FALSE 0.52183406 0.12882096
-##   TRUE  0.09170306 0.25764192
+##   FALSE 0.52729258 0.12554585
+##   TRUE  0.08733624 0.25982533
 ```
 
-For the training set, the overall accuracy is 77.95%. Recall that 38.65% of passengers survived. Therefore, the simplest model would be to predict that everyone died, which would mean we would be correct 61.35% of the time. Therefore, our prediction model is 16.59% better than guessing.
+For the training set, the overall accuracy is 78.71%. Recall that 38.54% of passengers survived. Therefore, the simplest model would be to predict that everyone died, which would mean we would be correct 61.46% of the time. Therefore, our prediction model is 17.25% better than guessing.
 
 ---
 # Checking with the validation dataset
@@ -911,7 +980,7 @@ For the training set, the overall accuracy is 77.95%. Recall that 38.65% of pass
 ```
 ## 
 ##        No       Yes 
-## 0.6284987 0.3715013
+## 0.6259542 0.3740458
 ```
 
 ```r
@@ -924,11 +993,11 @@ tab_test &lt;- table(titanic_test$prediciton_class, titanic_test$survived) %&gt;
 ```
 ##        
 ##                 No        Yes
-##   FALSE 0.56997455 0.12213740
-##   TRUE  0.05852417 0.24936387
+##   FALSE 0.55216285 0.12468193
+##   TRUE  0.07379135 0.24936387
 ```
 
-The overall accuracy is 81.93%, or 19.1% better than guessing.
+The overall accuracy is 80.15%, or 17.6% better than guessing.
 
 ---
 # Receiver Operating Characteristic (ROC) Curve
@@ -942,10 +1011,10 @@ summary(roc)
 ```
 
 ```
-## AUC = 0.821
+## AUC = 0.823
 ## Cost of false-positive = 1
 ## Cost of false-negative = 1
-## Threshold with minimum cost = 0.545
+## Threshold with minimum cost = 0.495
 ```
 
 ---
@@ -956,7 +1025,7 @@ summary(roc)
 plot(roc)
 ```
 
-&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # ROC Curve
@@ -966,7 +1035,7 @@ plot(roc)
 plot(roc, curve = 'accuracy')
 ```
 
-&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 class: font90
@@ -1019,10 +1088,17 @@ psranges2 &lt;- psrange(test.df2, test.df2$treat, treat ~ .,
 plot(psranges2)
 ```
 
-&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="09-Logistic_Regression_files/figure-html/unnamed-chunk-57-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # Additional Resources
+
+
+* [The Path to Log Likelihood](https://jbryer.github.io/VisualStats/articles/log_likelihood.html)
+
+* [Visual Introduction to Maximum Likelihood Estimation](https://jbryer.github.io/VisualStats/articles/mle.html)
+
+* [VisualStats R Package](https://jbryer.github.io/VisualStats/index.html)
 
 * [Logistic Regression Details Pt 2: Maximum Likelihood](https://www.youtube.com/watch?v=BfKanl1aSG0)
 
@@ -1094,6 +1170,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

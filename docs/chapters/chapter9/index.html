@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Chapter 9 - DATA 606 - Statistics &amp; Probability - Spring 2022</title>
-<meta name="generator" content="Hugo 0.78.1" />
+<meta name="generator" content="Hugo 0.60.0" />
 <link href="//index.xml" rel="alternate" type="application/rss+xml">
 <link rel="canonical" href="/chapters/chapter9/">
 <link rel="stylesheet" href="/css/theme.min.css">
@@ -30,15 +30,14 @@
 <meta name="twitter:description" content="MathJax.Hub.Config({ tex2jax: { inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]], displayMath: [[&#39;$$&#39;,&#39;$$&#39;], [&#39;\[&#39;,&#39;\]&#39;]], processEscapes: true, processEnvironments: true, skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;], TeX: { equationNumbers: { autoNumber: &#34;AMS&#34; }, extensions: [&#34;AMSmath.js&#34;, &#34;AMSsymbols.js&#34;] } } });   Multiple and Logistic Regression Learning Outcomes  Define the multiple linear regression model as $$\hat{y} = \beta_0 &#43; \beta_1 x_1 &#43; \beta_2 x_2 &#43; \cdots &#43; \beta_k x_k$$ where there are $k$ predictors (explanatory variables). Interpret the estimate for the intercept ($b_0$) as the expected value of $y$ when all predictors are equal to 0, on average."/>
 <meta itemprop="name" content="Chapter 9">
 <meta itemprop="description" content="MathJax.Hub.Config({ tex2jax: { inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]], displayMath: [[&#39;$$&#39;,&#39;$$&#39;], [&#39;\[&#39;,&#39;\]&#39;]], processEscapes: true, processEnvironments: true, skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;], TeX: { equationNumbers: { autoNumber: &#34;AMS&#34; }, extensions: [&#34;AMSmath.js&#34;, &#34;AMSsymbols.js&#34;] } } });   Multiple and Logistic Regression Learning Outcomes  Define the multiple linear regression model as $$\hat{y} = \beta_0 &#43; \beta_1 x_1 &#43; \beta_2 x_2 &#43; \cdots &#43; \beta_k x_k$$ where there are $k$ predictors (explanatory variables). Interpret the estimate for the intercept ($b_0$) as the expected value of $y$ when all predictors are equal to 0, on average.">
-<meta itemprop="datePublished" content="2017-04-29T18:36:24+02:00" />
-<meta itemprop="dateModified" content="2017-04-29T18:36:24+02:00" />
+<meta itemprop="datePublished" content="2017-04-29T18:36:24&#43;02:00" />
+<meta itemprop="dateModified" content="2017-04-29T18:36:24&#43;02:00" />
 <meta itemprop="wordCount" content="711">
 <meta itemprop="image" content="/images/og-image.png"/>
 
 
 
-<meta itemprop="keywords" content="" />
-<link href='/fullcalendar-lib/main.css' rel='stylesheet' />
+<meta itemprop="keywords" content="" /><link href='/fullcalendar-lib/main.css' rel='stylesheet' />
 <script src='/fullcalendar-lib/main.js'></script>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -126,7 +125,7 @@ iii. Repeat until maximum possible adjusted $R^2$ is reached.</li>
 i. Try all possible simple linear regression models predicting $y$ using one explanatory variable at a time. Choose the model with the highest adjusted $R^2$.
 ii. Try all possible models adding one more explanatory variable at a time, and choose the model with the highest adjusted $R^2$.
 iii. Repeat until maximum possible adjusted $R^2$ is reached.</li>
-<li>Adjusted $R^2$ method is more computationally intensive, but it is more reliable, since it doesn&rsquo;t depend on an arbitrary significant level.</li>
+<li>Adjusted $R^2$ method is more computationally intensive, but it is more reliable, since it doesn't depend on an arbitrary significant level.</li>
 <li>List the conditions for multiple linear regression as
 <ol>
 <li>linear relationship between each (numerical) explanatory variable and the response - checked using scatterplots of $y$ vs. each $x$, and residuals plots of $residuals$ vs. each $x$</li>

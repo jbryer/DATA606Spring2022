@@ -12,18 +12,18 @@
   </head>
   <body>
     <textarea id="source">
+
+
+
+
 class: center, middle, inverse, title-slide
 
 # Multiple Linear Regression
 ## DATA 606 - Statistics &amp; Probability for Data Analytics
-### Jason Bryer, Ph.D. and Angela Lui, Ph.D.
+### Jason Bryer, Ph.D. and Angela Lui, Ph.D.
 ### April 13, 2022
 
 ---
-
-
-
-
 
 # One Minute Paper Results
 
@@ -209,8 +209,8 @@ $$ \hat{weight} = 198 + 0.72 volume - 184 coverpb $$
 # Interpretation of the regression coefficients
 
 &lt;center&gt;
-&lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Wed Apr 13 19:29:40 2022 --&gt;
+&lt;!-- html table generated in R 4.1.3 by xtable 1.8-4 package --&gt;
+&lt;!-- Wed Apr 27 18:44:01 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Estimate &lt;/th&gt; &lt;th&gt; Std. Error &lt;/th&gt; &lt;th&gt; t value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;|t|) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td align="right"&gt; (Intercept) &lt;/td&gt; &lt;td align="right"&gt; 197.9628 &lt;/td&gt; &lt;td align="right"&gt; 59.1927 &lt;/td&gt; &lt;td align="right"&gt; 3.34 &lt;/td&gt; &lt;td align="right"&gt; 0.0058 &lt;/td&gt; &lt;/tr&gt;
@@ -314,8 +314,8 @@ anova.poverty &lt;- anova(lm.poverty)
 print(xtable(anova.poverty, digits = 2), type='html')
 ```
 
-&lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Wed Apr 13 19:29:41 2022 --&gt;
+&lt;!-- html table generated in R 4.1.3 by xtable 1.8-4 package --&gt;
+&lt;!-- Wed Apr 27 18:44:02 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Df &lt;/th&gt; &lt;th&gt; Sum Sq &lt;/th&gt; &lt;th&gt; Mean Sq &lt;/th&gt; &lt;th&gt; F value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;F) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td&gt; female_house &lt;/td&gt; &lt;td align="right"&gt; 1.00 &lt;/td&gt; &lt;td align="right"&gt; 132.57 &lt;/td&gt; &lt;td align="right"&gt; 132.57 &lt;/td&gt; &lt;td align="right"&gt; 18.68 &lt;/td&gt; &lt;td align="right"&gt; 0.00 &lt;/td&gt; &lt;/tr&gt;
@@ -351,8 +351,8 @@ lm.poverty2 &lt;- lm(poverty ~ female_house + white, data=poverty)
 print(xtable(lm.poverty2), type='html')
 ```
 
-&lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Wed Apr 13 19:29:41 2022 --&gt;
+&lt;!-- html table generated in R 4.1.3 by xtable 1.8-4 package --&gt;
+&lt;!-- Wed Apr 27 18:44:02 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Estimate &lt;/th&gt; &lt;th&gt; Std. Error &lt;/th&gt; &lt;th&gt; t value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;|t|) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td align="right"&gt; (Intercept) &lt;/td&gt; &lt;td align="right"&gt; -2.5789 &lt;/td&gt; &lt;td align="right"&gt; 5.7849 &lt;/td&gt; &lt;td align="right"&gt; -0.45 &lt;/td&gt; &lt;td align="right"&gt; 0.6577 &lt;/td&gt; &lt;/tr&gt;
@@ -367,8 +367,8 @@ anova.poverty2 &lt;- anova(lm.poverty2)
 print(xtable(anova.poverty2, digits = 3), type='html')
 ```
 
-&lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Wed Apr 13 19:29:41 2022 --&gt;
+&lt;!-- html table generated in R 4.1.3 by xtable 1.8-4 package --&gt;
+&lt;!-- Wed Apr 27 18:44:02 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Df &lt;/th&gt; &lt;th&gt; Sum Sq &lt;/th&gt; &lt;th&gt; Mean Sq &lt;/th&gt; &lt;th&gt; F value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;F) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td&gt; female_house &lt;/td&gt; &lt;td align="right"&gt; 1.000 &lt;/td&gt; &lt;td align="right"&gt; 132.568 &lt;/td&gt; &lt;td align="right"&gt; 132.568 &lt;/td&gt; &lt;td align="right"&gt; 18.745 &lt;/td&gt; &lt;td align="right"&gt; 0.000 &lt;/td&gt; &lt;/tr&gt;
@@ -393,8 +393,8 @@ $$ R^2 = \frac{explained \quad variability \quad in \quad y}{total \quad variabi
 
 poverty vs % female head of household
 
-&lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Wed Apr 13 19:29:42 2022 --&gt;
+&lt;!-- html table generated in R 4.1.3 by xtable 1.8-4 package --&gt;
+&lt;!-- Wed Apr 27 18:44:03 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Estimate &lt;/th&gt; &lt;th&gt; Std. Error &lt;/th&gt; &lt;th&gt; t value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;|t|) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td align="right"&gt; (Intercept) &lt;/td&gt; &lt;td align="right"&gt; 3.3094 &lt;/td&gt; &lt;td align="right"&gt; 1.8970 &lt;/td&gt; &lt;td align="right"&gt; 1.74 &lt;/td&gt; &lt;td align="right"&gt; 0.0873 &lt;/td&gt; &lt;/tr&gt;
@@ -403,8 +403,8 @@ poverty vs % female head of household
 
 poverty vs % female head of household and % female household
 
-&lt;!-- html table generated in R 4.1.1 by xtable 1.8-4 package --&gt;
-&lt;!-- Wed Apr 13 19:29:42 2022 --&gt;
+&lt;!-- html table generated in R 4.1.3 by xtable 1.8-4 package --&gt;
+&lt;!-- Wed Apr 27 18:44:03 2022 --&gt;
 &lt;table border=1&gt;
 &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Estimate &lt;/th&gt; &lt;th&gt; Std. Error &lt;/th&gt; &lt;th&gt; t value &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;|t|) &lt;/th&gt;  &lt;/tr&gt;
   &lt;tr&gt; &lt;td align="right"&gt; (Intercept) &lt;/td&gt; &lt;td align="right"&gt; -2.5789 &lt;/td&gt; &lt;td align="right"&gt; 5.7849 &lt;/td&gt; &lt;td align="right"&gt; -0.45 &lt;/td&gt; &lt;td align="right"&gt; 0.6577 &lt;/td&gt; &lt;/tr&gt;
@@ -509,6 +509,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
