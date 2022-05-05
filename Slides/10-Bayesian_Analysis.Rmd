@@ -7,6 +7,7 @@ output:
   xaringan::moon_reader:
     css: ["assets/mtheme_max.css", "assets/fonts_mtheme_max.css"]
     lib_dir: libs
+    seal: false
     nature:
       highlightStyle: solarized-light
       highlightLanguage: R
@@ -29,6 +30,14 @@ editor_options:
 source('config.R')
 ```
 
+class: center, middle, inverse, title-slide
+
+# `r metadata$title`
+## `r metadata$subtitle`
+### `r metadata$author`
+### `r metadata$date`
+
+---
 # One Minute Paper Results
 
 ```{r, echo=FALSE, eval = TRUE}
