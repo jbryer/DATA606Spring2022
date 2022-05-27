@@ -82,4 +82,6 @@ You are not to use data sources used in class or the textbooks. Possible data so
 * Integrated Postsecondary Education Data System (IPEDS) [https://nces.ed.gov/ipeds/](https://nces.ed.gov/ipeds/)
 * U.S. Census and American Community Survey [https://cran.r-project.org/web/packages/acs/index.html](https://cran.r-project.org/web/packages/acs/index.html)
 * [10 Standard Datasets for Practicing Applied Machine Learning](https://machinelearningmastery.com/standard-machine-learning-datasets/)
-
+* [Awesome Public Datasets](https://github.com/awesomedata/awesome-public-datasets)
+* [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php) - See also this R package: https://github.com/tyluRp/ucimlr
+* [OpenML](https://www.openml.org/search?type=data&sort=runs&status=active)
